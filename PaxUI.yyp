@@ -21,6 +21,7 @@
   },
   "name":"PaxUI",
   "resources":[
+    {"id":{"name":"PaxDimension","path":"scripts/PaxDimension/PaxDimension.yy",},},
     {"id":{"name":"PaxEnums","path":"scripts/PaxEnums/PaxEnums.yy",},},
     {"id":{"name":"PaxWidget","path":"scripts/PaxWidget/PaxWidget.yy",},},
   ],
