@@ -24,6 +24,7 @@ enum PaxDirection {
 enum PaxJustify {
     Start,
     Center,
+    End,
     SpaceBetween,
     SpaceAround,
     SpaceEvenly
