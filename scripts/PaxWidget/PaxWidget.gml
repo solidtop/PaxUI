@@ -38,21 +38,21 @@ function PaxWidget() constructor {
         return undefined;
     }
     
-    /// @desc Sets the width of the widget.
+    /// @desc Sets the width of the widget. Accepts pixels, "N%" or "auto".
     /// @param {Real | String} value
     /// @returns {Struct.PaxWidget}
     width = function(value) {
         return self;
     }
     
-    /// @desc Sets the height of the widget.
+    /// @desc Sets the height of the widget. Accepts pixels, "N%" or "auto".
     /// @param {Real | String} value
     /// @returns {Struct.PaxWidget}
     height = function(value) {
         return self;
     }
     
-    /// @desc Sets the width and height of the widget.
+    /// @desc Sets the width and height of the widget. Accepts pixels, "N%" or "auto".
     /// @param {Real | String} width_value
     /// @param {Real | String} height_value
     /// @returns {Struct.PaxWidget}
@@ -60,28 +60,28 @@ function PaxWidget() constructor {
         return self;
     }
     
-    /// @desc Sets the minimum width the widget can shrink to.
+    /// @desc Sets the minimum width the widget can shrink to. Accepts pixels, "N%" or "auto".
     /// @param {Real | String} value
     /// @returns {Struct.PaxWidget}
     min_width = function(value) {
         return self;
     }
  
-    /// @desc Sets the minimum height the widget can shrink to.
+    /// @desc Sets the minimum height the widget can shrink to. Accepts pixels, "N%" or "auto".
     /// @param {Real | String} value
     /// @returns {Struct.PaxWidget}
     min_height = function(value) {
         return self;
     }
  
-    /// @desc Sets the maximum width the widget can grow to.
+    /// @desc Sets the maximum width the widget can grow to. Accepts pixels, "N%" or "auto".
     /// @param {Real | String} value
     /// @returns {Struct.PaxWidget}
     max_width = function(value) {
         return self;
     }
  
-    /// @desc Sets the maximum height the widget can grow to.
+    /// @desc Sets the maximum height the widget can grow to. Accepts pixels, "N%" or "auto".
     /// @param {Real | String} value
     /// @returns {Struct.PaxWidget}
     max_height = function(value) {
@@ -114,7 +114,7 @@ function PaxWidget() constructor {
         return self;
     }
     
-    /// @desc Sets the outer spacing around the widget.
+    /// @desc Sets the outer spacing around the widget. Accepts pixels, "N%" or "auto".
     /// 1 arg = all, 2 = vertical/horizontal, 4 = top/right/bottom/left
     /// @param {Real | String} top
     /// @param {Real | String} right
@@ -125,7 +125,7 @@ function PaxWidget() constructor {
         return self;
     }
     
-    /// @desc Sets the inner spacing between the widget's edges and its children.
+    /// @desc Sets the inner spacing between the widget's edges and its children. Accepts pixels, "N%" or "auto".
     /// 1 arg = all, 2 = vertical/horizontal, 4 = top/right/bottom/left
     /// @param {Real | String} top
     /// @param {Real | String} right 
@@ -188,7 +188,7 @@ function PaxWidget() constructor {
         return self;
     }
     
-    /// @desc Removes the widget from flow layout.
+    /// @desc Removes the widget from flow layout. Accepts pixels, "N%" or "auto".
     /// @param {Real | String} left
     /// @param {Real | String} top
     /// @returns {Struct.PaxWidget}
