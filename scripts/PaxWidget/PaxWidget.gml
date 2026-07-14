@@ -233,4 +233,57 @@ function PaxWidget() constructor {
     disable = function() {
         return self;
     }
+    
+    /// @desc Sets the widget's background sprite.
+    /// @param {Asset.GMSprite} sprite
+    /// @param {Real} subimg
+    /// @returns {Struct.PaxWidget}
+    sprite = function(sprite, subimg = 0) {
+        return self; 
+    }
+    
+    /// @desc Tints the widget's sprite.
+    /// @param {Constant.Colour} colour
+    /// @returns {Struct.PaxWidget}
+    tint = function(colour) { 
+        return self; 
+    }
+    
+    /// @desc Sets the opacity of the widget and its descendants.
+    /// @param {Real} value
+    /// @returns {Struct.PaxWidget}
+    alpha = function(value) {
+        return self;
+    }
+    
+    /// @desc Moves the widget visually without affecting layout.
+    /// @param {Real} x
+    /// @param {Real} y
+    /// @param {Real} z
+    /// @returns {Struct.PaxWidget}
+    translate = function(x, y, z = 0) {
+        return self;
+    }
+    
+    /// @desc Rotates the widget and its descendants around its center. Does not affect layout.
+    /// @param {Real} degrees
+    /// @returns {Struct.PaxWidget}
+    rotate = function(degrees) {
+        return self;
+    }
+    
+    /// @desc Scales the widget and its descendants from its center. Does not affect layout.
+    /// @param {Real} scale_x 
+    /// @param {Real} scale_y 
+    /// @param {Real} scale_z 
+    /// @returns {Struct.PaxWidget}
+    scale = function(scale_x, scale_y, scale_z = 1) {
+        return self;
+    }
+    
+    /// @desc Clips children that overflow the widget's content bounds.
+    /// @returns {Struct.PaxWidget}
+    clip = function() {
+        return self;
+    }
 }
