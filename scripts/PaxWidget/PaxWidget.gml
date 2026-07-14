@@ -286,4 +286,11 @@ function PaxWidget() constructor {
     clip = function() {
         return self;
     }
+    
+    /// @desc [Virtual] Updates this widget for the current frame. Override in subclasses. 
+    /// @param {Real} dt  Delta time in seconds.
+    _update = function(dt) {}
+
+    /// @desc [Virtual] Draws this widget. Override in subclasses to implement rendering.
+    _draw = function() {}
 }
