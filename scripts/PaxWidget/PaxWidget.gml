@@ -7,7 +7,7 @@ function PaxWidget() constructor {
     enabled = true;
     
     /// @desc Adds a child widget.
-    /// @param {Strcut.PaxWidget} child
+    /// @param {Struct.PaxWidget} child
     /// @returns {Struct.PaxWidget} 
     add = function(child) {
         return self;
