@@ -1,3 +1,4 @@
+/// @desc Bridges Pax layout styles to the underlying flexpanel node.
 function PaxLayout() constructor {
     /// @ignore
     _node = flexpanel_create_node();

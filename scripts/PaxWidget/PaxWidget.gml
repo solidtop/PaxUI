@@ -1,3 +1,4 @@
+/// @desc Base widget and fluent public API for building UI trees.
 function PaxWidget() constructor {
     children = [];
     parent = undefined;
