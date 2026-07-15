@@ -14,7 +14,7 @@ function PaxWidget() constructor {
     }
     
     /// @desc Removes a child widget without destroying it.
-    /// @param {Strcut.PaxWidget} child
+    /// @param {Struct.PaxWidget} child
     /// @returns {Struct.PaxWidget} 
     remove = function(child) {
         return self;
