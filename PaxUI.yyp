@@ -11,6 +11,7 @@
   "defaultScriptType":1,
   "Folders":[
     {"$GMFolder":"","%Name":"Core","folderPath":"folders/Core.yy","name":"Core","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"Math","folderPath":"folders/Math.yy","name":"Math","resourceType":"GMFolder","resourceVersion":"2.0",},
   ],
   "ForcedPrefabProjectReferences":[],
   "IncludedFiles":[],
@@ -24,6 +25,7 @@
     {"id":{"name":"PaxDimension","path":"scripts/PaxDimension/PaxDimension.yy",},},
     {"id":{"name":"PaxEnums","path":"scripts/PaxEnums/PaxEnums.yy",},},
     {"id":{"name":"PaxLayout","path":"scripts/PaxLayout/PaxLayout.yy",},},
+    {"id":{"name":"PaxRect","path":"scripts/PaxRect/PaxRect.yy",},},
     {"id":{"name":"PaxRenderContext","path":"scripts/PaxRenderContext/PaxRenderContext.yy",},},
     {"id":{"name":"PaxRenderer","path":"scripts/PaxRenderer/PaxRenderer.yy",},},
     {"id":{"name":"PaxUpdater","path":"scripts/PaxUpdater/PaxUpdater.yy",},},

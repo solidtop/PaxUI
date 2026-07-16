@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"PaxRect",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"PaxRect",
+  "parent":{
+    "name":"Math",
+    "path":"folders/Math.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
