@@ -14,19 +14,16 @@ function PaxRenderContext() constructor {
 
     /// @desc Multiplies an alpha onto the effective alpha until the matching pop_alpha().
     /// @param {Real} alpha
+    /// @returns {Real} The new effective alpha.
     push_alpha = function(alpha) {
-        array_push(_alpha_stack, get_alpha() * alpha);
+        var effective = array_last(_alpha_stack) * alpha;
+        array_push(_alpha_stack, effective);
+        return effective;
     }
     
     /// @desc Restores the effective alpha.
     pop_alpha = function() {
         array_pop(_alpha_stack);
-    }
-    
-    /// @desc Returns the current effective alpha.
-    /// @returns {Real}
-    get_alpha = function() {
-        return _alpha_stack[array_length(_alpha_stack) - 1];
     }
     
     /// @desc Applies a transform to everything drawn until the matching

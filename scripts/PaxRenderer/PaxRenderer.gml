@@ -18,8 +18,7 @@ function PaxRenderer() constructor {
     _render_tree = function(widget, ctx) {
         if (!widget.visible) return;
             
-        ctx.push_alpha(widget.style.alpha);
-        _draw_context.alpha = ctx.get_alpha();
+        _draw_context.alpha = ctx.push_alpha(widget.style.alpha);
         
         var transform = widget._transform;
         var transformed = transform != undefined && !transform.is_identity();
