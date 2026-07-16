@@ -37,11 +37,24 @@ function PaxRect(x, y, width, height) constructor {
     /// @param {Struct.PaxRect} rect
     /// @returns {Struct.PaxRect}
     intersect = function(rect) {
+        return intersect_into(rect, new PaxRect(0, 0, 0, 0));
+    }
+
+    /// @desc Writes the intersection of this rect and another into an existing rect.
+    /// @param {Struct.PaxRect} rect
+    /// @param {Struct.PaxRect} out
+    /// @returns {Struct.PaxRect}
+    intersect_into = function(rect, out) {
         var x1 = max(x, rect.x);
         var y1 = max(y, rect.y);
         var x2 = min(x + width,  rect.x + rect.width);
         var y2 = min(y + height, rect.y + rect.height);
-        if (x2 <= x1 || y2 <= y1) return new PaxRect(0, 0, 0, 0);
-        return new PaxRect(x1, y1, x2 - x1, y2 - y1);
+
+        if (x2 <= x1 || y2 <= y1) 
+            out.set(0, 0, 0, 0);
+        else 
+            out.set(x1, y1, x2 - x1, y2 - y1);
+        
+        return out;
     }
 }

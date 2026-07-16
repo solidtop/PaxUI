@@ -1,7 +1,16 @@
+display_set_gui_maximise();
 updater = new PaxUpdater();
 renderer = new PaxRenderer();
 root = new PaxWidget();
 
-root.add(new PaxWidget().size(200, 200).background(c_blue).center().rotate(20).add(
-    new PaxWidget().size("50%", "50%").background(c_red)
-));
+widget = new PaxWidget().size(400, 400).clip().background(c_gray);
+
+repeat (40) {
+	widget.add(
+        new PaxWidget().size(100, 100).background(c_green).clip().add(
+            new PaxWidget().size(200, 50).background(c_red)
+        )
+    )
+}
+
+root.add(widget);

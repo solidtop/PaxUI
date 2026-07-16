@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"PaxClipStack",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"PaxClipStack",
+  "parent":{
+    "name":"Core",
+    "path":"folders/Core.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

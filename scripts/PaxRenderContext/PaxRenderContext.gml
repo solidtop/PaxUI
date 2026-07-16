@@ -4,12 +4,15 @@ function PaxRenderContext() constructor {
     _alpha_stack = [1];
     /// @ignore
     _identity = matrix_build_identity();
+    /// @ignore
+    _clip_stack = new PaxClipStack();
 
     /// @desc Clears all state, ready for a new render pass.
     reset = function() {
         _alpha_stack = [1];
         matrix_stack_clear();
         matrix_set(matrix_world, _identity);
+        _clip_stack.clear();
     }
 
     /// @desc Multiplies an alpha onto the effective alpha until the matching pop_alpha().
@@ -38,5 +41,17 @@ function PaxRenderContext() constructor {
     /// Every push_transform() must be balanced by exactly one pop_transform().
     pop_transform = function() {
         matrix_stack_pop();
+    }
+    
+    /// @desc Clips everything drawn to the given rect until the matching pop_clip().
+    /// Nested clips are intersected with the enclosing region.
+    /// @param {Struct.PaxRect} rect
+    push_clip = function(rect) {
+        _clip_stack.push(rect);
+    }
+
+    /// @desc Removes the most recent clip, restoring the enclosing region.
+    pop_clip = function() {
+        _clip_stack.pop();
     }
 }

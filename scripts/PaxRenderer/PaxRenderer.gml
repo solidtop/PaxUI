@@ -23,11 +23,13 @@ function PaxRenderer() constructor {
         var transform = widget._transform;
         var transformed = transform != undefined && !transform.is_identity();
         if (transformed) 
-            ctx.push_transform(
-                transform.build_matrix(widget.bounds)
-            );
+            ctx.push_transform(transform.build_matrix(widget.bounds));
         
         widget._draw(_draw_context);
+        
+        var clipped = widget.clips_children; 
+        if (clipped) 
+            ctx.push_clip(widget.bounds);
         
         var children = widget.children;
         for (var i = 0; i < array_length(children); i++) 
@@ -35,5 +37,6 @@ function PaxRenderer() constructor {
         
         ctx.pop_alpha();
         if (transformed) ctx.pop_transform();
+        if (clipped) ctx.pop_clip();    
     }
 }

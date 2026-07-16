@@ -13,6 +13,7 @@ function PaxWidget() constructor {
     
     visible = true;
     enabled = true;
+    clips_children = false;
     
     /// @desc Adds a child widget.
     /// @param {Struct.PaxWidget} child
@@ -390,6 +391,7 @@ function PaxWidget() constructor {
     /// @desc Clips children that overflow the widget's content bounds.
     /// @returns {Struct.PaxWidget}
     clip = function() {
+        clips_children = true;
         return self;
     }
     

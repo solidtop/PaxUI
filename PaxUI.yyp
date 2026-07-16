@@ -25,6 +25,7 @@
   "resources":[
     {"id":{"name":"obj_demo","path":"objects/obj_demo/obj_demo.yy",},},
     {"id":{"name":"rm_demo","path":"rooms/rm_demo/rm_demo.yy",},},
+    {"id":{"name":"PaxClipStack","path":"scripts/PaxClipStack/PaxClipStack.yy",},},
     {"id":{"name":"PaxDimension","path":"scripts/PaxDimension/PaxDimension.yy",},},
     {"id":{"name":"PaxDrawContext","path":"scripts/PaxDrawContext/PaxDrawContext.yy",},},
     {"id":{"name":"PaxEnums","path":"scripts/PaxEnums/PaxEnums.yy",},},
