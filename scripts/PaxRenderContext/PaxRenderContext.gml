@@ -2,10 +2,14 @@
 function PaxRenderContext() constructor {
     /// @ignore
     _alpha_stack = [1];
+    /// @ignore
+    _identity = matrix_build_identity();
 
     /// @desc Clears all state, ready for a new render pass.
     reset = function() {
         _alpha_stack = [1];
+        matrix_stack_clear();
+        matrix_set(matrix_world, _identity);
     }
 
     /// @desc Multiplies an alpha onto the effective alpha until the matching pop_alpha().
@@ -26,9 +30,9 @@ function PaxRenderContext() constructor {
     }
     
     /// @desc Applies a transform to everything drawn until the matching
-    /// pop_transform(). Pushes onto a stack, so nested transforms compose.
+    /// pop_transform(). Composes with the current transform, so nesting works.
     /// @param {Array<Real>} matrix
-    push_transform = function (matrix) {
+    push_transform = function(matrix) {
         matrix_stack_push(matrix);
         matrix_set(matrix_world, matrix_stack_top());
     }

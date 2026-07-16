@@ -21,13 +21,20 @@ function PaxRenderer() constructor {
         ctx.push_alpha(widget.style.alpha);
         _draw_context.alpha = ctx.get_alpha();
         
+        var transform = widget._transform;
+        var transformed = transform != undefined && !transform.is_identity();
+        if (transformed) 
+            ctx.push_transform(
+                transform.build_matrix(widget.bounds)
+            );
+        
         widget._draw(_draw_context);
         
         var children = widget.children;
-        for (var i = 0; i < array_length(children); i++) {
+        for (var i = 0; i < array_length(children); i++) 
         	_render_tree(children[i], ctx);
-        }
         
         ctx.pop_alpha();
+        if (transformed) ctx.pop_transform();
     }
 }

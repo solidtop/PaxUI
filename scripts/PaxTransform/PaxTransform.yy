@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"PaxTransform",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"PaxTransform",
+  "parent":{
+    "name":"Math",
+    "path":"folders/Math.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

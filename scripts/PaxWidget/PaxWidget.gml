@@ -2,6 +2,8 @@
 function PaxWidget() constructor {
     /// @ignore
     _layout = new PaxLayout();
+    /// @ignore
+    _transform = undefined;
     
     children = [];
     parent = undefined;
@@ -357,6 +359,10 @@ function PaxWidget() constructor {
     /// @param {Real} z
     /// @returns {Struct.PaxWidget}
     translate = function(x, y, z = 0) {
+        var transform = _ensure_transform();
+        transform.x = x;
+        transform.y = y;
+        transform.z = z;
         return self;
     }
     
@@ -364,15 +370,20 @@ function PaxWidget() constructor {
     /// @param {Real} degrees
     /// @returns {Struct.PaxWidget}
     rotate = function(degrees) {
+        _ensure_transform().angle_z = degrees;
         return self;
     }
     
     /// @desc Scales the widget and its descendants from its center. Does not affect layout.
-    /// @param {Real} scale_x 
-    /// @param {Real} scale_y 
-    /// @param {Real} scale_z 
+    /// @param {Real} scale_x
+    /// @param {Real} scale_y Defaults to scale_x for uniform scaling.
+    /// @param {Real} scale_z
     /// @returns {Struct.PaxWidget}
-    scale = function(scale_x, scale_y, scale_z = 1) {
+    scale = function(scale_x, scale_y = undefined, scale_z = 1) {
+        var transform = _ensure_transform();
+        transform.scale_x = scale_x;
+        transform.scale_y = scale_y ?? scale_x;
+        transform.scale_z = scale_z;
         return self;
     }
     
@@ -397,6 +408,13 @@ function PaxWidget() constructor {
         );
     }
     
+    /// @ignore
+    /// @returns {Struct.PaxTransform}
+    _ensure_transform = function() {
+        _transform ??= new PaxTransform();
+        return _transform;
+    }
+
     /// @ignore
     /// @param {Function} setter
     /// @param {Real | String} top

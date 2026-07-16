@@ -11,8 +11,8 @@
   "defaultScriptType":1,
   "Folders":[
     {"$GMFolder":"","%Name":"Core","folderPath":"folders/Core.yy","name":"Core","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Sprites","folderPath":"folders/Sprites.yy","name":"Sprites","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Math","folderPath":"folders/Math.yy","name":"Math","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"Sprites","folderPath":"folders/Sprites.yy","name":"Sprites","resourceType":"GMFolder","resourceVersion":"2.0",},
   ],
   "ForcedPrefabProjectReferences":[],
   "IncludedFiles":[],
@@ -33,6 +33,7 @@
     {"id":{"name":"PaxRenderContext","path":"scripts/PaxRenderContext/PaxRenderContext.yy",},},
     {"id":{"name":"PaxRenderer","path":"scripts/PaxRenderer/PaxRenderer.yy",},},
     {"id":{"name":"PaxStyle","path":"scripts/PaxStyle/PaxStyle.yy",},},
+    {"id":{"name":"PaxTransform","path":"scripts/PaxTransform/PaxTransform.yy",},},
     {"id":{"name":"PaxUpdater","path":"scripts/PaxUpdater/PaxUpdater.yy",},},
     {"id":{"name":"PaxWidget","path":"scripts/PaxWidget/PaxWidget.yy",},},
     {"id":{"name":"spr_pax_pixel","path":"sprites/spr_pax_pixel/spr_pax_pixel.yy",},},
