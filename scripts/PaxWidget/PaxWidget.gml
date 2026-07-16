@@ -7,6 +7,7 @@ function PaxWidget() constructor {
     parent = undefined;
     name = "";
     bounds = new PaxRect(0, 0, 0, 0);
+    style = new PaxStyle();
     
     visible = true;
     enabled = true;
@@ -312,20 +313,41 @@ function PaxWidget() constructor {
     /// @param {Real} subimg
     /// @returns {Struct.PaxWidget}
     sprite = function(sprite, subimg = 0) {
-        return self; 
+        style.sprite = sprite;
+        style.subimg = subimg;
+        return self;
+    }
+
+    /// @desc Fills the widget's background with a solid colour.
+    /// @param {Constant.Colour} colour
+    /// @returns {Struct.PaxWidget}
+    background = function(colour) {
+        style.sprite = spr_pax_pixel;
+        style.colour = colour;
+        return self;
+    }
+
+    /// @desc Copies a style preset into this widget's own style.
+    /// @param {Struct.PaxStyle} preset
+    /// @returns {Struct.PaxWidget}
+    styled = function(preset) {
+        style.copy_from(preset);
+        return self;
     }
     
     /// @desc Tints the widget's sprite.
     /// @param {Constant.Colour} colour
     /// @returns {Struct.PaxWidget}
-    tint = function(colour) { 
-        return self; 
+    tint = function(colour) {
+        style.colour = colour;
+        return self;
     }
     
     /// @desc Sets the opacity of the widget and its descendants.
     /// @param {Real} value
     /// @returns {Struct.PaxWidget}
     alpha = function(value) {
+        style.alpha = value;
         return self;
     }
     
@@ -364,8 +386,16 @@ function PaxWidget() constructor {
     /// @param {Real} dt  Delta time in seconds.
     _update = function(dt) {}
 
-    /// @desc [Virtual] Draws this widget. Override in subclasses to implement rendering.
-    _draw = function() {}
+    /// @desc [Virtual] Draws this widget; by default the style's background sprite.
+    /// @param {Struct.PaxDrawContext} ctx
+    _draw = function(ctx) {
+        if (style.sprite == undefined) return;
+        ctx.sprite(
+            style.sprite, style.subimg,
+            bounds.x, bounds.y, bounds.width, bounds.height,
+            style.colour
+        );
+    }
     
     /// @ignore
     /// @param {Function} setter
