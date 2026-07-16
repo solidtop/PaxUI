@@ -171,10 +171,11 @@ function PaxLayout() constructor {
         flexpanel_calculate_layout(_node, width, height, flexpanel_direction.LTR);
     }
     
-    /// @desc Returns the computed layout of this node after calculate():
-    /// @returns {Struct}
-    get_bounds = function() {
-        return flexpanel_node_layout_get_position(_node, false);
+    /// @desc Writes the computed bounds of this node into the given rect.
+    /// @param {Struct.PaxRect} out_rect
+    get_bounds = function(out_rect) {
+        var position = flexpanel_node_layout_get_position(_node, false);
+        out_rect.set(position.left, position.top, position.width, position.height);
     }
     
     /// @ignore

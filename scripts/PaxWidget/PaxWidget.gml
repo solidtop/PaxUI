@@ -6,6 +6,7 @@ function PaxWidget() constructor {
     children = [];
     parent = undefined;
     name = "";
+    bounds = new PaxRect(0, 0, 0, 0);
     
     visible = true;
     enabled = true;

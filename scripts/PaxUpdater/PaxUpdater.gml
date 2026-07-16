@@ -7,20 +7,29 @@ function PaxUpdater() constructor {
     update = function(root, dt) {
         var gui_width = display_get_gui_width();
         var gui_height = display_get_gui_height();
-        root.layout.calculate(gui_width, gui_height);
-        
-        _update_widget_tree(root, dt);
+        root._layout.calculate(gui_width, gui_height);
+        _sync_bounds(root);
+        _update_tree(root, dt);
     }
-    
+
     /// @ignore
-    /// @param {Struct.PaxWidget} widget 
-    /// @param {Real} dt
-    _update_widget_tree = function(widget, dt) {
-        widget._update(dt);
-        
+    /// @param {Struct.PaxWidget} widget
+    _sync_bounds = function(widget) {
+        widget._layout.get_bounds(widget.bounds);
+
         var children = widget.children;
-        for (var i = 0; i < array_length(children); i++) {
-        	_update_widget_tree(children[i], dt);
-        }
+        for (var i = 0; i < array_length(children); i++) 
+        	_sync_bounds(children[i]);
+    }
+
+    /// @ignore
+    /// @param {Struct.PaxWidget} widget
+    /// @param {Real} dt
+    _update_tree = function(widget, dt) {
+        widget._update(dt);
+
+        var children = widget.children;
+        for (var i = 0; i < array_length(children); i++) 
+        	_update_tree(children[i], dt);
     }
 }
