@@ -114,6 +114,12 @@ function PaxLayout() constructor {
         flexpanel_node_style_set_flex_wrap(_node, _to_flexpanel_wrap(wrap));
     }
     
+    /// @desc Shorthand for grow=factor, shrink=1, basis=0: siblings share space proportionally.
+    /// @param {Real} factor
+    set_flex = function(factor) {
+        flexpanel_node_style_set_flex(_node, factor);
+    }
+    
     /// @desc Sets the grow factor: how much free space this node takes relative to siblings.
     /// @param {Real} factor
     set_flex_grow = function(factor) {

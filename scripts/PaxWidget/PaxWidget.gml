@@ -1,7 +1,11 @@
 /// @desc Base widget and fluent public API for building UI trees.
 function PaxWidget() constructor {
+    /// @ignore
+    _layout = new PaxLayout();
+    
     children = [];
     parent = undefined;
+    name = "";
     
     visible = true;
     enabled = true;
@@ -10,6 +14,9 @@ function PaxWidget() constructor {
     /// @param {Struct.PaxWidget} child
     /// @returns {Struct.PaxWidget} 
     add = function(child) {
+        _layout.insert_child(child._layout, array_length(children));
+        array_push(children, child);
+        child.parent = self;
         return self;
     }
     
@@ -17,25 +24,43 @@ function PaxWidget() constructor {
     /// @param {Struct.PaxWidget} child
     /// @returns {Struct.PaxWidget} 
     remove = function(child) {
+        var index = array_get_index(children, child);
+        if (index == -1) return self;
+        array_delete(children, index, 1);
+        child.parent = undefined;
+        _layout.remove_child(child._layout);
         return self;
     }
     
     /// @desc Destroys this widget and all descendants, freeing native resources.
     destroy = function() {
+        if (parent != undefined) 
+            parent.remove(self);
         
+        for (var i = array_length(children) - 1; i >= 0; i--)
+            children[i].destroy();
+        
+        _layout.destroy();
     }
     
     /// @desc Assigns a name for later lookup via find().
     /// @param {String} value
     /// @returns {Struct.PaxWidget}
-    name = function(value) {
+    named = function(value) {
+        name = value;
         return self;
     }
     
     /// @desc Recursively searches descendants for a widget by name.
     /// @param {String} name
     /// @returns {Struct.PaxWidget}
-    find = function(name) {
+    find = function(name) { 
+        for (var i = 0; i < array_length(children); i++) {
+           var child = children[i];
+           if (child.name == name) return child;
+           var found = child.find(name);
+           if (found != undefined) return found;
+        }
         return undefined;
     }
     
@@ -43,6 +68,7 @@ function PaxWidget() constructor {
     /// @param {Real | String} value
     /// @returns {Struct.PaxWidget}
     width = function(value) {
+        _layout.set_width(PaxDimension.parse(value));
         return self;
     }
     
@@ -50,6 +76,7 @@ function PaxWidget() constructor {
     /// @param {Real | String} value
     /// @returns {Struct.PaxWidget}
     height = function(value) {
+        _layout.set_height(PaxDimension.parse(value));
         return self;
     }
     
@@ -58,6 +85,8 @@ function PaxWidget() constructor {
     /// @param {Real | String} height_value
     /// @returns {Struct.PaxWidget}
     size = function(width_value, height_value) {
+        width(width_value);
+        height(height_value);
         return self;
     }
     
@@ -65,6 +94,7 @@ function PaxWidget() constructor {
     /// @param {Real | String} value
     /// @returns {Struct.PaxWidget}
     min_width = function(value) {
+        _layout.set_min_width(PaxDimension.parse(value));
         return self;
     }
  
@@ -72,6 +102,7 @@ function PaxWidget() constructor {
     /// @param {Real | String} value
     /// @returns {Struct.PaxWidget}
     min_height = function(value) {
+        _layout.set_min_height(PaxDimension.parse(value));
         return self;
     }
  
@@ -79,6 +110,7 @@ function PaxWidget() constructor {
     /// @param {Real | String} value
     /// @returns {Struct.PaxWidget}
     max_width = function(value) {
+        _layout.set_max_width(PaxDimension.parse(value));
         return self;
     }
  
@@ -86,25 +118,40 @@ function PaxWidget() constructor {
     /// @param {Real | String} value
     /// @returns {Struct.PaxWidget}
     max_height = function(value) {
+        _layout.set_max_height(PaxDimension.parse(value));
         return self;
     }
     
     /// @desc Sizes the widget to fill all available space on both axes.
     /// @returns {Struct.PaxWidget}
     fill = function() {
+        var dimension = new PaxDimension(100, PaxUnit.Percent);
+        _layout.set_width(dimension);
+        _layout.set_height(dimension);
+        return self;
+    }
+    
+    /// @desc Shares space with siblings proportionally by factor.
+    /// @param {Real} factor
+    /// @returns {Struct.PaxWidget}
+    flex = function(factor = 1) {
+        _layout.set_flex(factor);
         return self;
     }
     
     /// @desc Grows the widget to take up remaining space along the parent's main axis.
     /// @returns {Struct.PaxWidget}
     expand = function() {
+        _layout.set_flex_grow(1);
+        _layout.set_flex_shrink(1);
         return self;
     }
     
     /// @desc Sets the grow factor: how this widget expands relative to siblings.
     /// @param {Real} factor
     /// @returns {Struct.PaxWidget}
-    flex = function(factor = 1) {
+    grow = function(factor = 1) {
+        _layout.set_flex_grow(factor);
         return self;
     }
     
@@ -112,6 +159,7 @@ function PaxWidget() constructor {
     /// @param {Real} factor
     /// @returns {Struct.PaxWidget}
     shrink = function(factor = 1) {
+        _layout.set_flex_shrink(factor);
         return self;
     }
     
@@ -123,6 +171,7 @@ function PaxWidget() constructor {
     /// @param {Real | String} left
     /// @returns {Struct.PaxWidget}
     margin = function(top, right = undefined, bottom = undefined, left = undefined) {
+        _apply_to_edges(_layout.set_margin, top, right, bottom, left);
         return self;
     }
     
@@ -134,31 +183,36 @@ function PaxWidget() constructor {
     /// @param {Real | String} left
     /// @returns {Struct.PaxWidget}
     padding = function(top, right = undefined, bottom = undefined, left = undefined) {
+        _apply_to_edges(_layout.set_padding, top, right, bottom, left);
         return self;
     }
     
-    /// @desc Sets the spacing between children along the main axis.
+    /// @desc Sets the spacing between children.
     /// @param {Real} pixels
     /// @returns {Struct.PaxWidget}
     gap = function(pixels) {
+        _layout.set_gap(PaxAxis.Both, pixels);
         return self;
     }
     
     /// @desc Lays out children horizontally.
     /// @returns {Struct.PaxWidget}
     row = function() {
+        _layout.set_direction(PaxDirection.Row);
         return self;
     }
     
     /// @desc Lays out children vertically.
     /// @returns {Struct.PaxWidget}
     column = function() {
+        _layout.set_direction(PaxDirection.Column);
         return self;
     }
     
     /// @desc Enables wrapping of children onto multiple lines.
     /// @returns {Struct.PaxWidget}
     wrap = function() {
+        _layout.set_wrap(PaxWrap.Wrap);
         return self;
     }
     
@@ -166,6 +220,7 @@ function PaxWidget() constructor {
     /// @param {Enum.PaxJustify} value
     /// @returns {Struct.PaxWidget}
     justify = function(value) {
+        _layout.set_justify(value);
         return self;
     }
     
@@ -173,6 +228,7 @@ function PaxWidget() constructor {
     /// @param {Enum.PaxAlign} value
     /// @returns {Struct.PaxWidget}
     align = function(value) {
+        _layout.set_align_items(value);
         return self;
     }
     
@@ -180,12 +236,15 @@ function PaxWidget() constructor {
     /// @param {Enum.PaxAlign} value
     /// @returns {Struct.PaxWidget}
     align_self = function(value) {
+        _layout.set_align_self(value);
         return self;
     }
     
     /// @desc Centers children on both axis.
     /// @returns {Struct.PaxWidget}
     center = function() {
+        _layout.set_justify(PaxJustify.Center);
+        _layout.set_align_items(PaxAlign.Center);
         return self;
     }
     
@@ -194,6 +253,11 @@ function PaxWidget() constructor {
     /// @param {Real | String} top
     /// @returns {Struct.PaxWidget}
     absolute = function(left = undefined, top = undefined) {
+        _layout.set_position_type(PaxPosition.Absolute);
+        if (left != undefined)
+            _layout.set_position(PaxEdge.Left, PaxDimension.parse(left));
+        if (top != undefined)
+            _layout.set_position(PaxEdge.Top, PaxDimension.parse(top));
         return self;   
     }
     
@@ -202,36 +266,43 @@ function PaxWidget() constructor {
     /// @param {Real | String} value
     /// @returns {Struct.PaxWidget}
     inset = function(edge, value) {
+        _layout.set_position(edge, PaxDimension.parse(value));
         return self;
     }
     
     /// @desc Makes the widget visible and included in layout.
     /// @returns {Struct.PaxWidget}
     show = function() {
+        visible = true;
+        _layout.set_display(true);
         return self;
     }
     
     /// @desc Hides the widget and removes it from layout.
     /// @returns {Struct.PaxWidget}
     hide = function() {
+        visible = false;
+        _layout.set_display(false);
         return self;
     }
     
     /// @desc Toggles between shown and hidden.
     /// @returns {Struct.PaxWidget}
     toggle = function() {
-        return self;
+        return visible ? hide() : show();
     }
     
     /// @desc Enables interaction with the widget.
     /// @returns {Struct.PaxWidget}
     enable = function() {
+        enabled = true;
         return self;
     }
  
     /// @desc Disables interaction; the widget stays visible but ignores input.
     /// @returns {Struct.PaxWidget}
     disable = function() {
+        enabled = false;
         return self;
     }
     
@@ -288,10 +359,30 @@ function PaxWidget() constructor {
         return self;
     }
     
-    /// @desc [Virtual] Updates this widget for the current frame. Override in subclasses. 
+    /// @desc [Virtual] Updates this widget for the current frame. Override in subclasses.
     /// @param {Real} dt  Delta time in seconds.
     _update = function(dt) {}
 
     /// @desc [Virtual] Draws this widget. Override in subclasses to implement rendering.
     _draw = function() {}
+    
+    /// @ignore
+    /// @param {Function} setter
+    /// @param {Real | String} top
+    /// @param {Real | String} right
+    /// @param {Real | String} bottom
+    /// @param {Real | String} left
+    static _apply_to_edges = function(setter, top, right, bottom, left) {
+        if (right == undefined) {
+            setter(PaxEdge.All, PaxDimension.parse(top));
+        } else if (bottom == undefined) {
+            setter(PaxEdge.Vertical, PaxDimension.parse(top));
+            setter(PaxEdge.Horizontal, PaxDimension.parse(right));
+        } else {
+            setter(PaxEdge.Top, PaxDimension.parse(top));
+            setter(PaxEdge.Right, PaxDimension.parse(right));
+            setter(PaxEdge.Bottom, PaxDimension.parse(bottom));
+            setter(PaxEdge.Left, PaxDimension.parse(left ?? right));
+        }
+    }
 }
