@@ -54,4 +54,13 @@ function PaxRenderContext() constructor {
     pop_clip = function() {
         _clip_stack.pop();
     }
+
+    /// @desc Returns whether a rect, shifted by an offset, is fully outside the visible region.
+    /// @param {Struct.PaxRect} rect
+    /// @param {Real} offset_x
+    /// @param {Real} offset_y
+    /// @returns {Bool}
+    is_culled = function(rect, offset_x, offset_y) {
+        return _clip_stack.is_culled(rect, offset_x, offset_y);
+    }
 }

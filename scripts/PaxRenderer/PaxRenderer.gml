@@ -9,34 +9,50 @@ function PaxRenderer() constructor {
     /// @param {Struct.PaxWidget} root
     render = function(root) {
         _render_context.reset();
-        _render_tree(root, _render_context);
+        _render_tree(root, _render_context, 0, 0, true);
     }
-    
+
     /// @ignore
     /// @param {Struct.PaxWidget} widget
     /// @param {Struct.PaxRenderContext} ctx
-    _render_tree = function(widget, ctx) {
+    /// @param {Real} offset_x Accumulated ancestor translation.
+    /// @param {Real} offset_y Accumulated ancestor translation.
+    /// @param {Bool} cullable False under rotation/scale, where bounds no longer match pixels.
+    _render_tree = function(widget, ctx, offset_x, offset_y, cullable) {
         if (!widget.visible) return;
-            
-        _draw_context.alpha = ctx.push_alpha(widget.style.alpha);
-        
+
         var transform = widget._transform;
         var transformed = transform != undefined && !transform.is_identity();
-        if (transformed) 
+        if (transformed) {
+            if (transform.is_translation_only()) {
+                offset_x += transform.x;
+                offset_y += transform.y;
+            } else {
+                cullable = false;
+            }
+        }
+
+        var culled = cullable && ctx.is_culled(widget.bounds, offset_x, offset_y);
+        if (culled && widget.clips_children) return;
+
+        _draw_context.alpha = ctx.push_alpha(widget.style.alpha);
+
+        if (transformed)
             ctx.push_transform(transform.build_matrix(widget.bounds));
-        
-        widget._draw(_draw_context);
-        
-        var clipped = widget.clips_children; 
-        if (clipped) 
+
+        if (!culled)
+            widget._draw(_draw_context);
+
+        var clipped = widget.clips_children;
+        if (clipped)
             ctx.push_clip(widget.bounds);
-        
+
         var children = widget.children;
-        for (var i = 0; i < array_length(children); i++) 
-        	_render_tree(children[i], ctx);
-        
-        ctx.pop_alpha();
+        for (var i = 0; i < array_length(children); i++)
+        	_render_tree(children[i], ctx, offset_x, offset_y, cullable);
+
+        if (clipped) ctx.pop_clip();
         if (transformed) ctx.pop_transform();
-        if (clipped) ctx.pop_clip();    
+        ctx.pop_alpha();
     }
 }

@@ -36,6 +36,24 @@ function PaxClipStack() constructor {
         _depth = 0;
     }
     
+    /// @desc Returns whether a rect, shifted by an offset, lies fully outside the
+    /// active clip region. Nothing is culled while the stack is empty.
+    /// @param {Struct.PaxRect} rect
+    /// @param {Real} offset_x
+    /// @param {Real} offset_y
+    /// @returns {Bool}
+    is_culled = function(rect, offset_x, offset_y) {
+        var region = current();
+        if (region == undefined) return false;
+
+        var rx = rect.x + offset_x;
+        var ry = rect.y + offset_y;
+        return rx >= region.right()
+            || ry >= region.bottom()
+            || rx + rect.width  <= region.x
+            || ry + rect.height <= region.y;
+    }
+    
     /// @ignore
     /// @returns {Struct.PaxRect}
     _ensure_slot = function() {
