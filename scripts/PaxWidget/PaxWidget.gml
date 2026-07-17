@@ -9,6 +9,7 @@ function PaxWidget() constructor {
     parent = undefined;
     name = "";
     bounds = new PaxRect(0, 0, 0, 0);
+    content_bounds = new PaxRect(0, 0, 0, 0);
     style = new PaxStyle();
     
     visible = true;

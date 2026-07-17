@@ -171,11 +171,21 @@ function PaxLayout() constructor {
         flexpanel_calculate_layout(_node, width, height, flexpanel_direction.LTR);
     }
     
-    /// @desc Writes the computed bounds of this node into the given rect.
+    /// @desc Reads the computed bounds of this node into the given rects.
     /// @param {Struct.PaxRect} out_rect
-    get_bounds = function(out_rect) {
+    /// @param {Struct.PaxRect} out_content_rect Optional; receives the bounds inset by padding.
+    read_bounds = function(out_rect, out_content_rect = undefined) {
         var position = flexpanel_node_layout_get_position(_node, false);
         out_rect.set(position.left, position.top, position.width, position.height);
+
+        if (out_content_rect != undefined) {
+            out_content_rect.set(
+                position.left + position.paddingLeft,
+                position.top + position.paddingTop,
+                max(0, position.width - position.paddingLeft - position.paddingRight),
+                max(0, position.height - position.paddingTop - position.paddingBottom)
+            );
+        }
     }
     
     /// @ignore

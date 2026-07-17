@@ -15,7 +15,7 @@ function PaxUpdater() constructor {
     /// @ignore
     /// @param {Struct.PaxWidget} widget
     _sync_bounds = function(widget) {
-        widget._layout.get_bounds(widget.bounds);
+        widget._layout.read_bounds(widget.bounds, widget.content_bounds);
 
         var children = widget.children;
         for (var i = 0; i < array_length(children); i++) 

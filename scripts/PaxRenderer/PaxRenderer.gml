@@ -45,7 +45,7 @@ function PaxRenderer() constructor {
 
         var clipped = widget.clips_children;
         if (clipped)
-            ctx.push_clip(widget.bounds);
+            ctx.push_clip(widget.content_bounds);
 
         var children = widget.children;
         for (var i = 0; i < array_length(children); i++)
