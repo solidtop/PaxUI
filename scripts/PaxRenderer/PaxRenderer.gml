@@ -15,9 +15,9 @@ function PaxRenderer() constructor {
     /// @ignore
     /// @param {Struct.PaxWidget} widget
     /// @param {Struct.PaxRenderContext} ctx
-    /// @param {Real} offset_x Accumulated ancestor translation.
-    /// @param {Real} offset_y Accumulated ancestor translation.
-    /// @param {Bool} cullable False under rotation/scale, where bounds no longer match pixels.
+    /// @param {Real} offset_x 
+    /// @param {Real} offset_y 
+    /// @param {Bool} cullable
     _render_tree = function(widget, ctx, offset_x, offset_y, cullable) {
         if (!widget.visible) return;
 
