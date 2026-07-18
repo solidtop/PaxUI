@@ -7,7 +7,7 @@ function PaxClipStack() constructor {
     
     /// @desc Pushes a clip rect, intersected with the current region.
     /// @param {Struct.PaxRect} rect
-    push = function(rect) {
+    static push = function(rect) {
         var region = _ensure_slot();
 
         if (_depth > 0) 
@@ -20,19 +20,19 @@ function PaxClipStack() constructor {
     }
     
     /// @desc Pops the current clip region, restoring the previous one.
-    pop = function() {
+    static pop = function() {
         _depth--;
         _apply();
     }
     
     /// @desc Returns the active clip rect
     /// @returns {Struct.PaxRect}
-    current = function() {
+    static current = function() {
         return (_depth > 0) ? _stack[_depth - 1] : undefined;
     }
     
     /// @desc Empties the stack, removing all clipping.
-    clear = function() {
+    static clear = function() {
         _depth = 0;
     }
     
@@ -42,7 +42,7 @@ function PaxClipStack() constructor {
     /// @param {Real} offset_x
     /// @param {Real} offset_y
     /// @returns {Bool}
-    is_culled = function(rect, offset_x, offset_y) {
+    static is_culled = function(rect, offset_x, offset_y) {
         var region = current();
         if (region == undefined) return false;
 
@@ -56,7 +56,7 @@ function PaxClipStack() constructor {
     
     /// @ignore
     /// @returns {Struct.PaxRect}
-    _ensure_slot = function() {
+    static _ensure_slot = function() {
         if (_depth >= array_length(_stack) || !is_struct(_stack[_depth])) 
             _stack[_depth] = new PaxRect(0, 0, 0, 0);
         
@@ -64,7 +64,7 @@ function PaxClipStack() constructor {
     }
 
     /// @ignore
-    _apply = function() {
+    static _apply = function() {
         var region = current();
         
         if (region == undefined) {

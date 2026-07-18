@@ -41,6 +41,7 @@ function PaxRenderContext() constructor {
     /// Every push_transform() must be balanced by exactly one pop_transform().
     static pop_transform = function() {
         matrix_stack_pop();
+        matrix_set(matrix_world, matrix_stack_top());
     }
     
     /// @desc Clips everything drawn to the given rect until the matching pop_clip().
