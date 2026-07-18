@@ -7,7 +7,7 @@ function PaxRenderer() constructor {
 
     /// @desc Renders a widget tree, walking it depth-first.
     /// @param {Struct.PaxWidget} root
-    render = function(root) {
+    static render = function(root) {
         _render_context.reset();
         _render_tree(root, _render_context, 0, 0, true);
     }
@@ -18,7 +18,7 @@ function PaxRenderer() constructor {
     /// @param {Real} offset_x 
     /// @param {Real} offset_y 
     /// @param {Bool} cullable
-    _render_tree = function(widget, ctx, offset_x, offset_y, cullable) {
+    static _render_tree = function(widget, ctx, offset_x, offset_y, cullable) {
         if (!widget.visible) return;
 
         var transform = widget._transform;

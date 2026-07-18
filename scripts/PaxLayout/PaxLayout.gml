@@ -6,58 +6,58 @@ function PaxLayout() constructor {
     /// @desc Inserts a child layout at the given index in this node's children.
     /// @param {Struct.PaxLayout} child_layout
     /// @param {Real} index
-    insert_child = function(child_layout, index) {
+    static insert_child = function(child_layout, index) {
         flexpanel_node_insert_child(_node, child_layout._node, index);
     }
     
     /// @desc Detaches a child layout from this node. The child itself is not destroyed.
     /// @param {Struct.PaxLayout} child_layout
-    remove_child = function(child_layout) {
+    static remove_child = function(child_layout) {
         flexpanel_node_remove_child(_node, child_layout._node);
     }
     
     /// @desc Destroys the underlying node. The layout is unusable afterwards.
-    destroy = function() {
+    static destroy = function() {
         flexpanel_delete_node(_node);
         _node = undefined;
     }
     
     /// @desc Sets the preferred width of the node.
     /// @param {Struct.PaxDimension} dimension
-    set_width = function(dimension) {
+    static set_width = function(dimension) {
         flexpanel_node_style_set_width(_node, dimension.value, _to_flexpanel_unit(dimension.unit));
     }
     
     /// @desc Sets the preferred height of the node.
     /// @param {Struct.PaxDimension} dimension
-    set_height = function(dimension) {
+    static set_height = function(dimension) {
         flexpanel_node_style_set_height(_node, dimension.value, _to_flexpanel_unit(dimension.unit));
     }
     
     /// @desc Sets the minimum width the node can shrink to. Does not accept "auto".
     /// @param {Struct.PaxDimension} dimension
-    set_min_width = function(dimension) {
+    static set_min_width = function(dimension) {
         _assert_not_auto(dimension, "min_width");
         flexpanel_node_style_set_min_width(_node, dimension.value, _to_flexpanel_unit(dimension.unit));
     }
     
     /// @desc Sets the minimum height the node can shrink to. Does not accept "auto".
     /// @param {Struct.PaxDimension} dimension
-    set_min_height = function(dimension) {
+    static set_min_height = function(dimension) {
         _assert_not_auto(dimension, "min_height");
         flexpanel_node_style_set_min_height(_node, dimension.value, _to_flexpanel_unit(dimension.unit));
     }
     
     /// @desc Sets the maximum width the node can grow to. Does not accept "auto".
     /// @param {Struct.PaxDimension} dimension
-    set_max_width = function(dimension) {
+    static set_max_width = function(dimension) {
         _assert_not_auto(dimension, "max_width");
         flexpanel_node_style_set_max_width(_node, dimension.value, _to_flexpanel_unit(dimension.unit));
     }
     
     /// @desc Sets the maximum height the node can grow to. Does not accept "auto".
     /// @param {Struct.PaxDimension} dimension
-    set_max_height = function(dimension) {
+    static set_max_height = function(dimension) {
         _assert_not_auto(dimension, "max_height");
         flexpanel_node_style_set_max_height(_node, dimension.value, _to_flexpanel_unit(dimension.unit));
     }
@@ -65,14 +65,14 @@ function PaxLayout() constructor {
     /// @desc Sets the outer spacing on one edge (or edge group) of the node.
     /// @param {Enum.PaxEdge} edge
     /// @param {Struct.PaxDimension} dimension
-    set_margin = function(edge, dimension) {
+    static set_margin = function(edge, dimension) {
         flexpanel_node_style_set_margin(_node, _to_flexpanel_edge(edge), dimension.value, _to_flexpanel_unit(dimension.unit));
     }
     
     /// @desc Sets the inner spacing on one edge (or edge group) of the node. Does not accept "auto".
     /// @param {Enum.PaxEdge} edge
     /// @param {Struct.PaxDimension} dimension
-    set_padding = function(edge, dimension) {
+    static set_padding = function(edge, dimension) {
         _assert_not_auto(dimension, "padding");
         flexpanel_node_style_set_padding(_node, _to_flexpanel_edge(edge), dimension.value, _to_flexpanel_unit(dimension.unit));
     }
@@ -80,74 +80,74 @@ function PaxLayout() constructor {
     /// @desc Sets the spacing between children along one axis.
     /// @param {Enum.PaxAxis} axis
     /// @param {Real} pixels
-    set_gap = function(axis, pixels) {
+    static set_gap = function(axis, pixels) {
         flexpanel_node_style_set_gap(_node, _to_flexpanel_gutter(axis), pixels);
     }
     
     /// @desc Sets which axis children are laid out along, and in which order.
     /// @param {Enum.PaxDirection} direction
-    set_direction = function(direction) {
+    static set_direction = function(direction) {
         flexpanel_node_style_set_flex_direction(_node, _to_flexpanel_direction(direction));
     }
     
     /// @desc Sets how children are distributed along the main axis.
     /// @param {Enum.PaxJustify} justify
-    set_justify = function(justify) {
+    static set_justify = function(justify) {
         flexpanel_node_style_set_justify_content(_node, _to_flexpanel_justify(justify));
     }
     
     /// @desc Sets the default cross-axis alignment of children.
     /// @param {Enum.PaxAlign} align
-    set_align_items = function(align) {
+    static set_align_items = function(align) {
         flexpanel_node_style_set_align_items(_node, _to_flexpanel_align(align));
     }
     
     /// @desc Overrides the cross-axis alignment set by this node's parent, for this node only.
     /// @param {Enum.PaxAlign} align
-    set_align_self = function(align) {
+    static set_align_self = function(align) {
         flexpanel_node_style_set_align_self(_node, _to_flexpanel_align(align));
     }
     
     /// @desc Sets whether children wrap onto multiple lines when they overflow the main axis.
     /// @param {Enum.PaxWrap} wrap
-    set_wrap = function(wrap) {
+    static set_wrap = function(wrap) {
         flexpanel_node_style_set_flex_wrap(_node, _to_flexpanel_wrap(wrap));
     }
     
     /// @desc Shorthand for grow=factor, shrink=1, basis=0: siblings share space proportionally.
     /// @param {Real} factor
-    set_flex = function(factor) {
+    static set_flex = function(factor) {
         flexpanel_node_style_set_flex(_node, factor);
     }
     
     /// @desc Sets the grow factor: how much free space this node takes relative to siblings.
     /// @param {Real} factor
-    set_flex_grow = function(factor) {
+    static set_flex_grow = function(factor) {
         flexpanel_node_style_set_flex_grow(_node, factor);
     }
     
     /// @desc Sets the shrink factor: how much this node contracts relative to siblings when space runs out.
     /// @param {Real} factor
-    set_flex_shrink = function(factor) {
+    static set_flex_shrink = function(factor) {
         flexpanel_node_style_set_flex_shrink(_node, factor);
     }
     
     /// @desc Sets the starting main-axis size of the node, before grow/shrink are applied.
     /// @param {Struct.PaxDimension} dimension
-    set_flex_basis = function(dimension) {
+    static set_flex_basis = function(dimension) {
         flexpanel_node_style_set_flex_basis(_node, dimension.value, _to_flexpanel_unit(dimension.unit));
     }
     
     /// @desc Includes or excludes the node from layout. Excluded nodes take up no space.
     /// @param {Bool} included
-    set_display = function(included) {
+    static set_display = function(included) {
         var display = included ? flexpanel_display.flex : flexpanel_display.none;
         flexpanel_node_style_set_display(_node, display);
     }
     
     /// @desc Sets whether the node follows flow layout (Relative) or is taken out of it (Absolute).
     /// @param {Enum.PaxPosition} position
-    set_position_type = function(position) {
+    static set_position_type = function(position) {
         flexpanel_node_style_set_position_type(_node, _to_flexpanel_position_type(position));
     }
     
@@ -155,7 +155,7 @@ function PaxLayout() constructor {
     /// Used with Absolute positioning (inset).
     /// @param {Enum.PaxEdge} edge
     /// @param {Struct.PaxDimension} dimension
-    set_position = function(edge, dimension) {
+    static set_position = function(edge, dimension) {
         flexpanel_node_style_set_position(
             _node, 
             _to_flexpanel_edge(edge), 
@@ -167,14 +167,14 @@ function PaxLayout() constructor {
     /// @desc Computes the layout of this node and its entire subtree.
     /// @param {Real} width
     /// @param {Real} height
-    calculate = function(width, height) {
+    static calculate = function(width, height) {
         flexpanel_calculate_layout(_node, width, height, flexpanel_direction.LTR);
     }
     
     /// @desc Reads the computed bounds of this node into the given rects.
     /// @param {Struct.PaxRect} out_rect
     /// @param {Struct.PaxRect} out_content_rect Optional; receives the bounds inset by padding.
-    read_bounds = function(out_rect, out_content_rect = undefined) {
+    static read_bounds = function(out_rect, out_content_rect = undefined) {
         var position = flexpanel_node_layout_get_position(_node, false);
         out_rect.set(position.left, position.top, position.width, position.height);
 

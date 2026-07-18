@@ -11,13 +11,13 @@ function PaxRect(x, y, width, height) constructor {
     
     /// @desc Returns the right edge.
     /// @returns {Real}
-    right = function() {
+    static right = function() {
         return x + width;
     }
     
     /// @desc Returns the bottom edge.
     /// @returns {Real}
-    bottom = function() {
+    static bottom = function() {
         return y + height;
     }
     
@@ -26,7 +26,7 @@ function PaxRect(x, y, width, height) constructor {
     /// @param {Real} y 
     /// @param {Real} width 
     /// @param {Real} height 
-    set = function(x, y, width, height) {
+    static set = function(x, y, width, height) {
         self.x = x;
         self.y = y;
         self.width = width;
@@ -36,7 +36,7 @@ function PaxRect(x, y, width, height) constructor {
     /// @desc Returns the intersection of this rect with another rect.
     /// @param {Struct.PaxRect} rect
     /// @returns {Struct.PaxRect}
-    intersect = function(rect) {
+    static intersect = function(rect) {
         return intersect_into(rect, new PaxRect(0, 0, 0, 0));
     }
 
@@ -44,7 +44,7 @@ function PaxRect(x, y, width, height) constructor {
     /// @param {Struct.PaxRect} rect
     /// @param {Struct.PaxRect} out
     /// @returns {Struct.PaxRect}
-    intersect_into = function(rect, out) {
+    static intersect_into = function(rect, out) {
         var x1 = max(x, rect.x);
         var y1 = max(y, rect.y);
         var x2 = min(x + width,  rect.x + rect.width);

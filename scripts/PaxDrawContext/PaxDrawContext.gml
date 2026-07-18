@@ -10,7 +10,7 @@ function PaxDrawContext() constructor {
     /// @param {Real} width
     /// @param {Real} height
     /// @param {Constant.Colour} colour
-    sprite = function(sprite, subimg, x, y, width, height, colour = c_white) {
+    static sprite = function(sprite, subimg, x, y, width, height, colour = c_white) {
         draw_sprite_stretched_ext(sprite, subimg, x, y, width, height, colour, alpha);
     }
 }

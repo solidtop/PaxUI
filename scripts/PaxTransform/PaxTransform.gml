@@ -22,13 +22,13 @@ function PaxTransform() constructor {
     
     /// @desc Returns whether this transform has no effect.
     /// @returns {Bool}
-    is_identity = function() {
+    static is_identity = function() {
         return x == 0 && y == 0 && z == 0 && is_translation_only();
     }
 
     /// @desc Returns whether this transform only translates (no rotation or scale).
     /// @returns {Bool}
-    is_translation_only = function() {
+    static is_translation_only = function() {
         return angle_x == 0 && angle_y == 0 && angle_z == 0
             && scale_x == 1 && scale_y == 1 && scale_z == 1;
     }
@@ -36,7 +36,7 @@ function PaxTransform() constructor {
     /// @desc Builds the transform matrix, pivoting within the given rect.
     /// @param {Struct.PaxRect} rect
     /// @returns {Array<Real>}
-    build_matrix = function(rect) {
+    static build_matrix = function(rect) {
         var px = rect.x + rect.width * origin_x;
         var py = rect.y + rect.height * origin_y;
         var pz = origin_z;
