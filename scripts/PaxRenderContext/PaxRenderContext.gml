@@ -10,7 +10,7 @@ function PaxRenderContext() constructor {
     /// @desc Clears all state, ready for a new render pass.
     static reset = function() {
         _alpha_stack = [1];
-        matrix_stack_clear();
+        if (!matrix_stack_is_empty()) matrix_stack_clear();
         matrix_set(matrix_world, _identity);
         _clip_stack.clear();
     }

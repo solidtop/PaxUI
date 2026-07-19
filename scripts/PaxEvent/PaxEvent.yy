@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"PaxEvent",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"PaxEvent",
+  "parent":{
+    "name":"Input",
+    "path":"folders/Input.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

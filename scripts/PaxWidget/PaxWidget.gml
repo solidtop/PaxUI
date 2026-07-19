@@ -10,11 +10,15 @@ function PaxWidget() constructor {
     name = "";
     bounds = new PaxRect(0, 0, 0, 0);
     content_bounds = new PaxRect(0, 0, 0, 0);
-    style = new PaxStyle();
+    style = undefined; 
     
     visible = true;
     enabled = true;
     clips_children = false;
+    pointer_filter = PaxPointerFilter.Pass;
+    focus_mode = PaxFocusMode.None;
+    focus_index = 0;
+    is_focused = false;
     
     /// @desc Adds a child widget.
     /// @param {Struct.PaxWidget} child
@@ -48,7 +52,13 @@ function PaxWidget() constructor {
         
         _layout.destroy();
     }
-    
+
+    /// @desc Returns whether the widget has been destroyed.
+    /// @returns {Bool}
+    static is_destroyed = function() {
+        return _layout.is_destroyed();
+    }
+
     /// @desc Assigns a name for later lookup via find().
     /// @param {String} value
     /// @returns {Struct.PaxWidget}
@@ -311,14 +321,44 @@ function PaxWidget() constructor {
         enabled = false;
         return self;
     }
-    
+
+    /// @desc Sets how the widget participates in pointer input.
+    /// @param {Enum.PaxPointerFilter} value
+    /// @returns {Struct.PaxWidget}
+    static pointer = function(value) {
+        pointer_filter = value;
+        return self;
+    }
+
+    /// @desc Makes the widget transparent to pointer input. Children are unaffected.
+    /// @returns {Struct.PaxWidget}
+    static pass_through = function() {
+        pointer_filter = PaxPointerFilter.Ignore;
+        return self;
+    }
+
+    /// @desc Gives this widget keyboard focus, if its focus_mode allows it.
+    /// @returns {Struct.PaxWidget}
+    static focus = function() {
+        pax_focus().focus(self);
+        return self;
+    }
+
+    /// @desc Removes keyboard focus from this widget, if it holds it.
+    /// @returns {Struct.PaxWidget}
+    static unfocus = function() {
+        if (is_focused) pax_focus().unfocus();
+        return self;
+    }
+
     /// @desc Sets the widget's background sprite.
     /// @param {Asset.GMSprite} sprite
     /// @param {Real} subimg
     /// @returns {Struct.PaxWidget}
     static sprite = function(sprite, subimg = 0) {
-        style.sprite = sprite;
-        style.subimg = subimg;
+        var current = _ensure_style();
+        current.sprite = sprite;
+        current.subimg = subimg;
         return self;
     }
 
@@ -326,32 +366,33 @@ function PaxWidget() constructor {
     /// @param {Constant.Colour} colour
     /// @returns {Struct.PaxWidget}
     static background = function(colour) {
-        style.sprite = spr_pax_pixel;
-        style.colour = colour;
+        var current = _ensure_style();
+        current.sprite = spr_pax_pixel;
+        current.colour = colour;
         return self;
     }
 
-    /// @desc Copies a style preset into this widget's own style.
+    /// @desc Copies a style preset into this widget's style override.
     /// @param {Struct.PaxStyle} preset
     /// @returns {Struct.PaxWidget}
     static styled = function(preset) {
-        style.copy_from(preset);
+        _ensure_style().copy_from(preset);
         return self;
     }
-    
+
     /// @desc Tints the widget's sprite.
     /// @param {Constant.Colour} colour
     /// @returns {Struct.PaxWidget}
     static tint = function(colour) {
-        style.colour = colour;
+        _ensure_style().colour = colour;
         return self;
     }
-    
+
     /// @desc Sets the opacity of the widget and its descendants.
     /// @param {Real} value
     /// @returns {Struct.PaxWidget}
     static alpha = function(value) {
-        style.alpha = value;
+        _ensure_style().alpha = value;
         return self;
     }
     
@@ -400,22 +441,55 @@ function PaxWidget() constructor {
     /// @param {Real} dt  Delta time in seconds.
     static _update = function(dt) {}
 
-    /// @desc [Virtual] Draws this widget; by default the style's background sprite.
+    /// @desc [Virtual] Handles an input event dispatched by PaxInput. Override in subclasses.
+    /// @param {Struct.PaxEvent} event
+    static _on_event = function(event) {}
+    
+    /// @desc [Virtual] Draws this widget; by default the active style's background sprite.
     /// @param {Struct.PaxDrawContext} ctx
     static _draw = function(ctx) {
-        if (style.sprite == undefined) return;
+        var current = _get_active_style();
+        if (current.sprite == undefined) return;
         ctx.sprite(
-            style.sprite, style.subimg,
+            current.sprite, current.subimg,
             bounds.x, bounds.y, bounds.width, bounds.height,
-            style.colour
+            current.colour
         );
     }
     
+    /// @desc [Virtual] Returns whether a point (in widget space) hits this widget.
+    /// @param {Real} point_x
+    /// @param {Real} point_y
+    /// @returns {Bool}
+    static _hit_test = function(point_x, point_y) {
+        return point_x >= bounds.x && point_y >= bounds.y
+            && point_x < bounds.x + bounds.width
+            && point_y < bounds.y + bounds.height;
+    }
+    
+    /// @desc [Virtual] Returns the style to draw with this frame. Override to swap styles by state.
+    /// @returns {Struct.PaxStyle}
+    static _get_active_style = function() {
+        return style ?? pax_theme().widget;
+    }
+
     /// @ignore
     /// @returns {Struct.PaxTransform}
     static _ensure_transform = function() {
         _transform ??= new PaxTransform();
         return _transform;
+    }
+    
+    /// @ignore 
+    /// @returns {Struct.PaxStyle}
+    static _ensure_style = function() {
+        if (style == undefined) {
+            var current = _get_active_style();
+            style = new PaxStyle();
+            style.copy_from(current);
+        }
+        
+        return style;
     }
 
     /// @ignore

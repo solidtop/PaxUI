@@ -35,7 +35,7 @@ function PaxRenderer() constructor {
         var culled = cullable && ctx.is_culled(widget.bounds, offset_x, offset_y);
         if (culled && widget.clips_children) return;
 
-        _draw_context.alpha = ctx.push_alpha(widget.style.alpha);
+        _draw_context.alpha = ctx.push_alpha(widget._get_active_style().alpha);
 
         if (transformed)
             ctx.push_transform(transform.build_matrix(widget.bounds));

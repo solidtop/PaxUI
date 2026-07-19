@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"PaxInputManager",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"PaxInputManager",
+  "parent":{
+    "name":"Input",
+    "path":"folders/Input.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

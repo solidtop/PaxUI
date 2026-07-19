@@ -21,6 +21,16 @@ function PaxLayout() constructor {
         flexpanel_delete_node(_node);
         _node = undefined;
     }
+
+    /// @desc Returns whether the underlying node has been destroyed.
+    /// @returns {Bool}
+    static is_destroyed = function() {
+        return _node == undefined;
+    }
+    
+    static is_destroyed = function() {
+        return _node == undefined;
+    }
     
     /// @desc Sets the preferred width of the node.
     /// @param {Struct.PaxDimension} dimension

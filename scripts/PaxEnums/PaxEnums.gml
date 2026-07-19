@@ -55,3 +55,30 @@ enum PaxPosition {
     Relative,
     Absolute
 }
+
+enum PaxEventType {
+    PointerPressed,
+    PointerReleased,
+    PointerMoved,
+    PointerEntered,
+    PointerExited,
+    PointerCancelled,
+    Scroll,
+    KeyPressed,
+    KeyReleased,
+    FocusEntered,
+    FocusExited,
+    Accept
+}
+
+enum PaxPointerFilter {
+    Stop,
+    Pass,
+    Ignore
+}
+
+enum PaxFocusMode {
+    None,   
+    Pointer,
+    All   
+}
