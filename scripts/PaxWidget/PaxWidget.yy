@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"PaxWidget",
   "parent":{
-    "name":"Core",
-    "path":"folders/Core.yy",
+    "name":"Widgets",
+    "path":"folders/Widgets.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

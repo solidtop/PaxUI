@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"PaxRenderer",
+  "%Name":"PaxTween",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"PaxRenderer",
+  "name":"PaxTween",
   "parent":{
-    "name":"Rendering",
-    "path":"folders/Rendering.yy",
+    "name":"Animation",
+    "path":"folders/Animation.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

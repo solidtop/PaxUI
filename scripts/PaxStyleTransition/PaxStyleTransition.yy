@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"PaxRenderer",
+  "%Name":"PaxStyleTransition",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"PaxRenderer",
+  "name":"PaxStyleTransition",
   "parent":{
-    "name":"Rendering",
-    "path":"folders/Rendering.yy",
+    "name":"Styling",
+    "path":"folders/Styling.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

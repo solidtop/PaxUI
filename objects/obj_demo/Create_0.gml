@@ -4,14 +4,8 @@ renderer = new PaxRenderer();
 input = new PaxInputManager();
 root = new PaxWidget();
 
-scroll = new PaxScrollView().size("50%", "50%").background(c_gray).gap(10).padding(20).wrap()
+button = new PaxButton().size(200, 50).background(c_red).transition(15);
 
-repeat (50) {
-	scroll.add(
-        new PaxButton().size(200, 200).on_clicked(function() {
-          show_debug_message("click");  
-        })
-    )
-}
+button.focus_mode = PaxFocusMode.None;
 
-root.add(scroll);
+root.add(button);

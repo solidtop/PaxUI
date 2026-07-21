@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"PaxTransform",
   "parent":{
-    "name":"Math",
-    "path":"folders/Math.yy",
+    "name":"Rendering",
+    "path":"folders/Rendering.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

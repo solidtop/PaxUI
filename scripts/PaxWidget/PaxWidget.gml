@@ -4,14 +4,16 @@ function PaxWidget() constructor {
     _layout = new PaxLayout();
     /// @ignore
     _transform = undefined;
+    /// @ignore
+    _transition = undefined;
     
     children = [];
     parent = undefined;
     name = "";
     bounds = new PaxRect(0, 0, 0, 0);
     content_bounds = new PaxRect(0, 0, 0, 0);
-    style = undefined; 
-    
+    style = undefined;
+
     visible = true;
     enabled = true;
     clips_children = false;
@@ -395,6 +397,15 @@ function PaxWidget() constructor {
         _ensure_style().alpha = value;
         return self;
     }
+
+    /// @desc Enables style transitions and sets their speed.
+    /// @param {Real} speed
+    /// @returns {Struct.PaxWidget}
+    static transition = function(speed) {
+        _transition ??= new PaxStyleTransition();
+        _transition.speed = speed;
+        return self;
+    }
     
     /// @desc Moves the widget visually without affecting layout.
     /// @param {Real} x
@@ -436,6 +447,12 @@ function PaxWidget() constructor {
         clips_children = true;
         return self;
     }
+
+    /// @desc Returns the widget's visual transform, creating it on first use.
+    /// @returns {Struct.PaxTransform}
+    static transform = function() {
+        return _ensure_transform();
+    }
     
     /// @desc [Virtual] Updates this widget for the current frame. Override in subclasses.
     /// @param {Real} dt  Delta time in seconds.
@@ -467,10 +484,17 @@ function PaxWidget() constructor {
             && point_y < bounds.y + bounds.height;
     }
     
-    /// @desc [Virtual] Returns the style to draw with this frame. Override to swap styles by state.
+    /// @desc [Virtual] Returns the target style before transition. Override to resolve by interaction state.
+    /// @returns {Struct.PaxStyle}
+    static _get_target_style = function() {
+        return style ?? pax_theme().widget;
+    }
+    
+    /// @ignore
     /// @returns {Struct.PaxStyle}
     static _get_active_style = function() {
-        return style ?? pax_theme().widget;
+        var target = _get_target_style();
+        return _transition == undefined ? target : _transition.current(target);
     }
 
     /// @ignore
@@ -490,6 +514,13 @@ function PaxWidget() constructor {
         }
         
         return style;
+    }
+    
+    /// @ignore
+    /// @param {Real} dt
+    static _update_transition = function(dt) {
+        if (_transition != undefined)
+            _transition.update(_get_target_style(), dt);
     }
 
     /// @ignore

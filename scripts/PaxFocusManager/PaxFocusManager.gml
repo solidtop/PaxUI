@@ -1,11 +1,11 @@
 /// @desc Manages which widget currently holds keyboard focus.
 /// Focused widgets receive FocusEntered/FocusExited through _on_event.
 function PaxFocusManager() constructor {
-    focused = undefined;
-
     /// @ignore
     _focus_event = new PaxEvent();
 
+    focused = undefined;
+    
     /// @desc Sets focus to the given widget, unfocusing any previous target.
     /// @param {Struct.PaxWidget} widget
     static focus = function(widget) {

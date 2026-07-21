@@ -7,13 +7,13 @@ function PaxButton() : PaxWidget() constructor {
     pointer_exited = new PaxSignal();
     focus_entered = new PaxSignal();
     focus_exited = new PaxSignal();
+    
     styles = undefined;
-
     focus_mode = PaxFocusMode.All;
     is_pressed = false;
     is_hovered = false;
-    
-    /// @desc Uses a per-state style set in place of the theme's. 
+
+    /// @desc Uses a per-state style set in place of the theme's.
     /// @param {Struct.PaxButtonStyle} preset_styles
     /// @returns {Struct.PaxButton}
     static styled_states = function(preset_styles) {
@@ -124,9 +124,9 @@ function PaxButton() : PaxWidget() constructor {
         }
     }
     
-    /// @desc [Override] Returns the style for the current visual state.
+    /// @desc [Override] Resolves the style for the current interaction state.
     /// @returns {Struct.PaxStyle}
-    static _get_active_style = function() {
+    static _get_target_style = function() {
         var states = styles ?? pax_theme().button;
         if (!enabled) return states.disabled;
         if (is_pressed && is_hovered) return states.pressed;

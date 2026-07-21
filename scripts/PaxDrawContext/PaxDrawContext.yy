@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"PaxDrawContext",
   "parent":{
-    "name":"Core",
-    "path":"folders/Core.yy",
+    "name":"Rendering",
+    "path":"folders/Rendering.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

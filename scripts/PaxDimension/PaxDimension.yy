@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"PaxDimension",
   "parent":{
-    "name":"Core",
-    "path":"folders/Core.yy",
+    "name":"Layout",
+    "path":"folders/Layout.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

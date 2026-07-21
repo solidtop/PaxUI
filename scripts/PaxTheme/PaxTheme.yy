@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"PaxTheme",
   "parent":{
-    "name":"Core",
-    "path":"folders/Core.yy",
+    "name":"Styling",
+    "path":"folders/Styling.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

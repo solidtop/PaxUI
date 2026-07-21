@@ -1,12 +1,5 @@
 /// @desc A scrollable viewport. 
 function PaxScrollView() : PaxWidget() constructor {
-    clips_children = true;
-
-    scroll_x = 0;
-    scroll_y = 0;
-
-    scrolled = new PaxSignal();
-
     /// @ignore
     _scroll_speed = 80;
     /// @ignore
@@ -45,6 +38,12 @@ function PaxScrollView() : PaxWidget() constructor {
     _velocity_x = 0;
     /// @ignore
     _velocity_y = 0;
+    
+    clips_children = true;
+    scroll_x = 0;
+    scroll_y = 0;
+    
+    scrolled = new PaxSignal();
 
     static _add_content = PaxWidget.add;
     _add_content(_content);

@@ -1,11 +1,5 @@
 /// @desc Polls device input and routes events through widget trees.
 function PaxInputManager() constructor {
-    gamepad_device = 0;       
-    stick_deadzone = 0.5;
-    nav_repeat_delay = 400;    
-    nav_repeat_interval = 130; 
-    mouse_buttons = [mb_left, mb_right, mb_middle];
-
     /// @ignore
     _pointer_event = new PaxPointerEvent();
     /// @ignore
@@ -38,6 +32,12 @@ function PaxInputManager() constructor {
     _nav_next_repeat = 0;
     /// @ignore
     _nav_suppressed = false;
+    
+    gamepad_device = 0;       
+    stick_deadzone = 0.5;
+    nav_repeat_delay = 400;    
+    nav_repeat_interval = 130; 
+    mouse_buttons = [mb_left, mb_right, mb_middle];
 
     /// @desc Polls device input and dispatches events through the widget tree.
     /// @param {Struct.PaxWidget} root

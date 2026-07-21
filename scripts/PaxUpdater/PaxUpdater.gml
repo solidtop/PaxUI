@@ -9,6 +9,7 @@ function PaxUpdater() constructor {
         var gui_height = display_get_gui_height();
         root._layout.calculate(gui_width, gui_height);
         _update_tree(root, dt);
+        pax_tweens().update(dt);
     }
 
     /// @ignore
@@ -17,6 +18,7 @@ function PaxUpdater() constructor {
     static _update_tree = function(widget, dt) {
         widget._layout.read_bounds(widget.bounds, widget.content_bounds);
         widget._update(dt);
+        widget._update_transition(dt);
 
         var children = widget.children;
         for (var i = 0; i < array_length(children); i++) 

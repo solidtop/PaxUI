@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"PaxRenderer",
+  "%Name":"PaxEase",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"PaxRenderer",
+  "name":"PaxEase",
   "parent":{
-    "name":"Rendering",
-    "path":"folders/Rendering.yy",
+    "name":"Animation",
+    "path":"folders/Animation.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",
