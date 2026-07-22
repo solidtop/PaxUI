@@ -1,11 +1,11 @@
-display_set_gui_maximise();
+//display_set_gui_maximise();
 updater = new PaxUpdater();
 renderer = new PaxRenderer();
 input = new PaxInputManager();
 root = new PaxWidget();
 
-button = new PaxButton().size(200, 50).background(c_red).transition(15);
+widget = new PaxWidget().size(500, 500).background(c_blue);
 
-button.focus_mode = PaxFocusMode.None;
+new PaxTween(widget.transform(), "x", 500, 4).chain(widget.transform(), "x", 200, 3);
 
-root.add(button);
+root.add(widget);

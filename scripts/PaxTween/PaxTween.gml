@@ -28,7 +28,9 @@ function PaxTween(target, property, to, duration) constructor {
     _started = false;
     /// @ignore
     _done = false;
-    
+    /// @ignore
+    _next = undefined;
+
     pax_tweens()._add(self);
     
     finished = new PaxSignal();
@@ -67,10 +69,25 @@ function PaxTween(target, property, to, duration) constructor {
         return self;
     }
 
-    /// @desc Stops the tween where it is, without finishing.
+    /// @desc Chains a follow-up tween that begins when this one finishes.
+    /// @param {Struct} target
+    /// @param {String} property
+    /// @param {Real} to
+    /// @param {Real} duration
+    /// @returns {Struct.PaxTween}
+    static chain = function(target, property, to, duration) {
+        var segment = new PaxTween(target, property, to, duration);
+        segment.stop(); // dormant until this tween completes
+        _next = segment;
+        return segment;
+    }
+
+    /// @desc Stops the tween where it is, without finishing. Cascades to any
+    /// queued segments, ending the whole chain.
     /// @returns {Struct.PaxTween}
     static stop = function() {
         _done = true;
+        if (_next != undefined) _next.stop();
         return self;
     }
 
@@ -92,6 +109,7 @@ function PaxTween(target, property, to, duration) constructor {
         _target[$ _property] = _to;
         _done = true;
         finished.emit(self);
+        if (_next != undefined) _next.restart();
         return self;
     }
 
