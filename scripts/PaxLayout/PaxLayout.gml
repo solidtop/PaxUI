@@ -301,7 +301,7 @@ function PaxLayout() constructor {
     /// @param {String} property_name
     static _assert_not_auto = function(dimension, property_name) {
         if (dimension.unit == PaxUnit.Auto) {
-            show_error($"PaxUI: \"auto\" is not a valid value for {property_name}.", true);
+            show_debug_message($"PaxUI: \"auto\" is not a valid value for {property_name}.", true);
         }
     }
 }
