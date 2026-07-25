@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"PaxRoot",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"PaxRoot",
+  "parent":{
+    "name":"Widgets",
+    "path":"folders/Widgets.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

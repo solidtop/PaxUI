@@ -27,11 +27,13 @@ function PaxLayout() constructor {
     static is_destroyed = function() {
         return _node == undefined;
     }
-    
-    static is_destroyed = function() {
-        return _node == undefined;
+
+    /// @desc Sets a function that measures the node's intrinsic size (e.g. text).
+    /// @param {Function} measure_function
+    static set_measure = function(measure_function) {
+        flexpanel_node_set_measure_function(_node, measure_function);
     }
-    
+
     /// @desc Sets the preferred width of the node.
     /// @param {Struct.PaxDimension} dimension
     static set_width = function(dimension) {

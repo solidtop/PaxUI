@@ -1,1 +1,1 @@
-renderer.render(root);
+root.render();

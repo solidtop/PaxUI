@@ -43,6 +43,7 @@
     {"id":{"name":"PaxRect","path":"scripts/PaxRect/PaxRect.yy",},},
     {"id":{"name":"PaxRenderContext","path":"scripts/PaxRenderContext/PaxRenderContext.yy",},},
     {"id":{"name":"PaxRenderer","path":"scripts/PaxRenderer/PaxRenderer.yy",},},
+    {"id":{"name":"PaxRoot","path":"scripts/PaxRoot/PaxRoot.yy",},},
     {"id":{"name":"PaxScrollView","path":"scripts/PaxScrollView/PaxScrollView.yy",},},
     {"id":{"name":"PaxSignal","path":"scripts/PaxSignal/PaxSignal.yy",},},
     {"id":{"name":"PaxStyle","path":"scripts/PaxStyle/PaxStyle.yy",},},

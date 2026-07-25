@@ -1,2 +1,1 @@
-input.process(root);
-updater.update(root, delta_time / 1_000_000);
+root.step();
