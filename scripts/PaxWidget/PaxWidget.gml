@@ -382,11 +382,11 @@ function PaxWidget() constructor {
         return self;
     }
 
-    /// @desc Tints the widget's sprite.
-    /// @param {Constant.Colour} colour
+    /// @desc Sets the colour the widget draws with.
+    /// @param {Constant.Colour} value
     /// @returns {Struct.PaxWidget}
-    static tint = function(colour) {
-        _ensure_style().colour = colour;
+    static colour = function(value) {
+        _ensure_style().colour = value;
         return self;
     }
 

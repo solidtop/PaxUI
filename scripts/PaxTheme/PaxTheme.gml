@@ -2,6 +2,9 @@
 function PaxTheme() constructor {
     widget = new PaxStyle();
     button = new PaxButtonStyle();
+
+    label = new PaxStyle();
+    label.colour = c_black;
 }
 
 /// @desc Returns the active theme; pass one to make it active.

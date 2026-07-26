@@ -1,8 +1,10 @@
+display_set_gui_maximise();
+
 root = new PaxRoot();
 
-widget = new PaxWidget().fill().background(c_blue);
+panel = new PaxWidget().size("30%", 500).background(c_gray);
 
-label = new PaxLabel("Label").align_self(PaxAlign.Center);
-widget.add(label);
+label = new PaxLabel("This is a test label").colour(c_red).align_text(fa_center);
 
-root.add(widget);
+panel.add(label);
+root.add(panel);

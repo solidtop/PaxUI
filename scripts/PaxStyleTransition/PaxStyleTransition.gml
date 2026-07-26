@@ -38,6 +38,8 @@ function PaxStyleTransition() constructor {
 
         _style.sprite = target.sprite;
         _style.subimg = target.subimg;
+        _style.font = target.font;
+        _style.line_height = target.line_height;
         _style.colour = make_colour_rgb(round(_r), round(_g), round(_b));
         _style.alpha = lerp(_style.alpha, target.alpha, amount);
         return _style;

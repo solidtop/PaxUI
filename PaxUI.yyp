@@ -19,7 +19,9 @@
     {"$GMFolder":"","%Name":"Styling","folderPath":"folders/Styling.yy","name":"Styling","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Widgets","folderPath":"folders/Widgets.yy","name":"Widgets","resourceType":"GMFolder","resourceVersion":"2.0",},
   ],
-  "ForcedPrefabProjectReferences":[],
+  "ForcedPrefabProjectReferences":[
+    {"link":"io.gamemaker.sdfshaders-1.0.0","name":"io.gamemaker.sdfshaders-1.0.0","path":"io.gamemaker.sdfshaders-1.0.0.yyp",},
+  ],
   "IncludedFiles":[],
   "isEcma":false,
   "LibraryEmitters":[],
@@ -39,6 +41,7 @@
     {"id":{"name":"PaxEvent","path":"scripts/PaxEvent/PaxEvent.yy",},},
     {"id":{"name":"PaxFocusManager","path":"scripts/PaxFocusManager/PaxFocusManager.yy",},},
     {"id":{"name":"PaxInputManager","path":"scripts/PaxInputManager/PaxInputManager.yy",},},
+    {"id":{"name":"PaxLabel","path":"scripts/PaxLabel/PaxLabel.yy",},},
     {"id":{"name":"PaxLayout","path":"scripts/PaxLayout/PaxLayout.yy",},},
     {"id":{"name":"PaxRect","path":"scripts/PaxRect/PaxRect.yy",},},
     {"id":{"name":"PaxRenderContext","path":"scripts/PaxRenderContext/PaxRenderContext.yy",},},

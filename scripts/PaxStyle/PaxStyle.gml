@@ -4,6 +4,19 @@ function PaxStyle() constructor {
     subimg = 0;
     colour = c_white;
     alpha = 1;
+    font = -1; 
+    line_height = -1;
+
+    /// @desc Copies all fields from another style.
+    /// @param {Struct.PaxStyle} style
+    static copy_from = function(style) {
+        sprite = style.sprite;
+        subimg = style.subimg;
+        colour = style.colour;
+        alpha = style.alpha;
+        font = style.font;
+        line_height = style.line_height;
+    }
 
     /// @desc Builds a solid-colour style.
     /// @param {Constant.Colour} colour
@@ -15,15 +28,6 @@ function PaxStyle() constructor {
         style.colour = colour;
         style.alpha = alpha;
         return style;
-    }
-
-    /// @desc Copies all fields from another style.
-    /// @param {Struct.PaxStyle} style
-    static copy_from = function(style) {
-        sprite = style.sprite;
-        subimg = style.subimg;
-        colour = style.colour;
-        alpha = style.alpha;
     }
 }
 
