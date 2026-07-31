@@ -49,6 +49,7 @@
     {"id":{"name":"PaxRoot","path":"scripts/PaxRoot/PaxRoot.yy",},},
     {"id":{"name":"PaxScrollView","path":"scripts/PaxScrollView/PaxScrollView.yy",},},
     {"id":{"name":"PaxSignal","path":"scripts/PaxSignal/PaxSignal.yy",},},
+    {"id":{"name":"PaxSlider","path":"scripts/PaxSlider/PaxSlider.yy",},},
     {"id":{"name":"PaxStyle","path":"scripts/PaxStyle/PaxStyle.yy",},},
     {"id":{"name":"PaxStyleTransition","path":"scripts/PaxStyleTransition/PaxStyleTransition.yy",},},
     {"id":{"name":"PaxTheme","path":"scripts/PaxTheme/PaxTheme.yy",},},

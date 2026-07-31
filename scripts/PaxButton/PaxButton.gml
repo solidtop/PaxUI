@@ -1,5 +1,8 @@
 /// @desc A clickable button widget.
 function PaxButton() : PaxWidget() constructor {
+    /// @ignore
+    _label = undefined;
+
     pressed = new PaxSignal();
     released = new PaxSignal();
     clicked = new PaxSignal();
@@ -12,6 +15,23 @@ function PaxButton() : PaxWidget() constructor {
     focus_mode = PaxFocusMode.All;
     is_pressed = false;
     is_hovered = false;
+
+    row();
+    center();
+
+    /// @desc Sets the button's text label.
+    /// @param {String} str
+    /// @returns {Struct.PaxButton}
+    static text = function(str) {
+        if (_label == undefined) {
+            _label = new PaxLabel(str);
+            add(_label);
+        } else {
+            _label.text = str;
+        }
+
+        return self;
+    }
 
     /// @desc Uses a per-state style set in place of the theme's.
     /// @param {Struct.PaxButtonStyle} preset_styles

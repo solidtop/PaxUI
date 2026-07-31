@@ -5,7 +5,7 @@ function PaxLabel(text = "") : PaxWidget() constructor {
     _halign = fa_left;
     /// @ignore
     _valign = fa_top;
-    
+
     self.text = text;
     pointer_filter = PaxPointerFilter.Ignore; 
 

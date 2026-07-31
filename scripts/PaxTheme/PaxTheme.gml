@@ -2,6 +2,7 @@
 function PaxTheme() constructor {
     widget = new PaxStyle();
     button = new PaxButtonStyle();
+    slider = new PaxSliderStyle();
 
     label = new PaxStyle();
     label.colour = c_black;

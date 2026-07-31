@@ -40,3 +40,14 @@ function PaxButtonStyle() constructor {
     focused = PaxStyle.build_solid(#72525D);
 }
 
+/// @desc Style for a slider: the three parts' looks plus their sizes.
+function PaxSliderStyle() constructor {
+    track = PaxStyle.build_solid(#3F3F46);
+    fill = PaxStyle.build_solid(#6366F1);
+    handle = PaxStyle.build_solid(#E4E4E7);
+    track_height = 8;
+    handle_size = 16;
+}
+
+new PaxStyle();
+
