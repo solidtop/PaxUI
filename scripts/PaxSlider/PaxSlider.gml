@@ -82,23 +82,19 @@ function PaxSlider() : PaxWidget() constructor {
                 _apply_from_pointer(event.x);
                 event.consume();
                 break;
-
             case PaxEventType.PointerMoved:
                 if (!_dragging) break;
                 _apply_from_pointer(event.x);
                 event.consume();
                 break;
-
             case PaxEventType.PointerReleased:
                 if (!_dragging) break;
                 _dragging = false;
                 event.consume();
                 break;
-
             case PaxEventType.PointerCancelled:
                 _dragging = false;
                 break;
-
             case PaxEventType.KeyPressed:
                 var nudge_amount = _step > 0 ? _step : (_max_value - _min_value) * 0.05;
                 if (event.key == vk_left || event.key == vk_down) {
@@ -140,6 +136,7 @@ function PaxSlider() : PaxWidget() constructor {
 
         var handle_x = handle_center_x - handle_size * 0.5;
         var handle_y = bounds.y + (bounds.height - handle_size) * 0.5;
+        
         ctx.sprite(handle.sprite, handle.subimg,
             handle_x, handle_y, handle_size, handle_size, handle.colour);
     }
