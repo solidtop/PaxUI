@@ -21,6 +21,7 @@ function PaxWidget() constructor {
     focus_mode = PaxFocusMode.None;
     focus_index = 0;
     is_focused = false;
+    is_hovered = false;
     
     /// @desc Adds a child widget.
     /// @param {Struct.PaxWidget} child
@@ -454,15 +455,15 @@ function PaxWidget() constructor {
         return _ensure_transform();
     }
     
-    /// @desc [Virtual] Updates this widget for the current frame. Override in subclasses.
+    /// @ignore [Virtual] Updates this widget for the current frame. Override in subclasses.
     /// @param {Real} dt  Delta time in seconds.
     static _update = function(dt) {}
 
-    /// @desc [Virtual] Handles an input event dispatched by PaxInput. Override in subclasses.
+    /// @ignore [Virtual] Handles an input event dispatched by PaxInput. Override in subclasses.
     /// @param {Struct.PaxEvent} event
     static _on_event = function(event) {}
     
-    /// @desc [Virtual] Draws this widget; by default the active style's background sprite.
+    /// @ignore [Virtual] Draws this widget; by default the active style's background sprite.
     /// @param {Struct.PaxDrawContext} ctx
     static _draw = function(ctx) {
         var current = _get_active_style();
@@ -474,7 +475,7 @@ function PaxWidget() constructor {
         );
     }
     
-    /// @desc [Virtual] Returns whether a point (in widget space) hits this widget.
+    /// @ignore [Virtual] Returns whether a point (in widget space) hits this widget.
     /// @param {Real} point_x
     /// @param {Real} point_y
     /// @returns {Bool}
@@ -484,17 +485,41 @@ function PaxWidget() constructor {
             && point_y < bounds.y + bounds.height;
     }
     
-    /// @desc [Virtual] Returns the target style before transition. Override to resolve by interaction state.
+    /// @ignore [Virtual] Returns the target style before transition. Override to resolve by interaction state.
     /// @returns {Struct.PaxStyle}
     static _get_target_style = function() {
         return style ?? pax_theme().widget;
     }
     
-    /// @ignore
+    /// @ignore [Virtual] Advances style transitions. Override in widgets with several styled parts.
+    /// @param {Real} dt
+    static _update_transitions = function(dt) {
+        if (_transition != undefined)
+            _transition.update(_get_target_style(), dt);
+    }
+    
+    /// @ignore 
     /// @returns {Struct.PaxStyle}
     static _get_active_style = function() {
-        var target = _get_target_style();
-        return _transition == undefined ? target : _transition.current(target);
+        return _resolve_style(_get_target_style(), _transition);
+    }
+
+    /// @ignore 
+    /// @param {Struct.PaxStyle} target
+    /// @param {Struct.PaxStyleTransition} transition
+    /// @returns {Struct.PaxStyle}
+    static _resolve_style = function(target, transition) {
+        return transition == undefined ? target : transition.current(target);
+    }
+
+    /// @ignore
+    /// @param {Struct.PaxStyleTransition} existing
+    /// @returns {Struct.PaxStyleTransition}
+    static _part_transition = function(existing) {
+        if (_transition == undefined) return undefined;
+        var transition = existing ?? new PaxStyleTransition();
+        transition.speed = _transition.speed;
+        return transition;
     }
 
     /// @ignore
@@ -504,7 +529,7 @@ function PaxWidget() constructor {
         return _transform;
     }
     
-    /// @ignore 
+    /// @ignore
     /// @returns {Struct.PaxStyle}
     static _ensure_style = function() {
         if (style == undefined) {
@@ -514,13 +539,6 @@ function PaxWidget() constructor {
         }
         
         return style;
-    }
-    
-    /// @ignore
-    /// @param {Real} dt
-    static _update_transition = function(dt) {
-        if (_transition != undefined)
-            _transition.update(_get_target_style(), dt);
     }
 
     /// @ignore

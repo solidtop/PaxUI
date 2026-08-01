@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"PaxButtonStyles",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"PaxButtonStyles",
+  "parent":{
+    "name":"Styling",
+    "path":"folders/Styling.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

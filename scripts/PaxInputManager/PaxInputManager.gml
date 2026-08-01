@@ -128,10 +128,14 @@ function PaxInputManager() constructor {
             j--;
         }
 
-        for (var k = 0; k <= i; k++)
+        for (var k = 0; k <= i; k++) {
+            _prev_hover_chain[k].is_hovered = false;
             _notify(_prev_hover_chain[k], PaxEventType.PointerExited, pointer_x, pointer_y);
-        for (var k = j; k >= 0; k--)
+        }
+        for (var k = j; k >= 0; k--) {
+            _hover_chain[k].is_hovered = true;
             _notify(_hover_chain[k], PaxEventType.PointerEntered, pointer_x, pointer_y);
+        }
     }
 
     /// @ignore 
@@ -456,8 +460,10 @@ function PaxInputManager() constructor {
 
     /// @ignore 
     static _clear_hover = function() {
-        for (var i = 0; i < array_length(_hover_chain); i++)
+        for (var i = 0; i < array_length(_hover_chain); i++) {
+            _hover_chain[i].is_hovered = false;
             _notify(_hover_chain[i], PaxEventType.PointerExited, _last_x, _last_y);
+        }
         array_resize(_hover_chain, 0);
     }
 

@@ -14,7 +14,6 @@ function PaxButton() : PaxWidget() constructor {
     styles = undefined;
     focus_mode = PaxFocusMode.All;
     is_pressed = false;
-    is_hovered = false;
 
     row();
     center();
@@ -33,10 +32,10 @@ function PaxButton() : PaxWidget() constructor {
         return self;
     }
 
-    /// @desc Uses a per-state style set in place of the theme's.
-    /// @param {Struct.PaxButtonStyle} preset_styles
+    /// @desc Uses a per-state style set in place of the theme's. The set is linked, not copied.
+    /// @param {Struct.PaxButtonStyles} preset_styles
     /// @returns {Struct.PaxButton}
-    static styled_states = function(preset_styles) {
+    static styled = function(preset_styles) {
         styles = preset_styles;
         return self;
     }
@@ -97,16 +96,14 @@ function PaxButton() : PaxWidget() constructor {
         return self;
     }
 
-    /// @desc [Override] Translates pointer events into button state and signals.
+    /// @ignore [Override] Translates pointer events into button state and signals.
     /// @param {Struct.PaxEvent} event
     static _on_event = function(event) {
         switch (event.type) {
             case PaxEventType.PointerEntered:
-                is_hovered = true;
                 pointer_entered.emit(self);
                 break;
             case PaxEventType.PointerExited:
-                is_hovered = false;
                 pointer_exited.emit(self);
                 break;
             case PaxEventType.PointerPressed:
@@ -144,14 +141,20 @@ function PaxButton() : PaxWidget() constructor {
         }
     }
     
-    /// @desc [Override] Resolves the style for the current interaction state.
+    /// @ignore [Override] Resolves the style for the current interaction state.
     /// @returns {Struct.PaxStyle}
     static _get_target_style = function() {
-        var states = styles ?? pax_theme().button;
-        if (!enabled) return states.disabled;
-        if (is_pressed && is_hovered) return states.pressed;
-        if (is_hovered) return states.hovered;
-        if (is_focused) return states.focused;
-        return style ?? states.normal;
+        var styles = _get_styles();
+        if (!enabled) return styles.disabled;
+        if (is_pressed && is_hovered) return styles.pressed;
+        if (is_hovered) return styles.hovered;
+        if (is_focused) return styles.focused;
+        return style ?? styles.normal;
+    }
+
+    /// @ignore
+    /// @returns {Struct.PaxButtonStyles}
+    static _get_styles = function() {
+        return styles ?? pax_theme().button;
     }
 }

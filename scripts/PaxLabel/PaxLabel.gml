@@ -35,7 +35,7 @@ function PaxLabel(text = "") : PaxWidget() constructor {
         return self;
     }
 
-    /// @desc [Override] Draws the text, aligned within bounds.
+    /// @ignore [Override] Draws the text, aligned within bounds.
     /// @param {Struct.PaxDrawContext} ctx
     static _draw = function(ctx) {
         var style = _get_active_style();
@@ -49,7 +49,7 @@ function PaxLabel(text = "") : PaxWidget() constructor {
             _halign, _valign, style.line_height);
     }
     
-    /// @desc [Override] Labels fall back to the theme's label style.
+    /// @ignore [Override] Labels fall back to the theme's label style.
     /// @returns {Struct.PaxStyle}
     static _get_target_style = function() {
         return style ?? pax_theme().label;

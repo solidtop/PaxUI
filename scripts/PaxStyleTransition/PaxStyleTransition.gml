@@ -2,7 +2,7 @@
 function PaxStyleTransition() constructor {
     /// @ignore
     _style = new PaxStyle();
-    /// @ignore 
+    /// @ignore Unrounded colour channels; blending the packed colour would quantise and stall.
     _r = 0;
     /// @ignore
     _g = 0;
@@ -24,11 +24,10 @@ function PaxStyleTransition() constructor {
     /// @desc Advances the blend toward the target style.
     /// @param {Struct.PaxStyle} target
     /// @param {Real} dt
-    /// @returns {Struct.PaxStyle}
     static update = function(target, dt) {
         if (!_initialized || speed <= 0) {
             _snap(target);
-            return _style;
+            return;
         }
 
         var amount = 1 - exp(-speed * dt);
@@ -36,13 +35,11 @@ function PaxStyleTransition() constructor {
         _g = lerp(_g, colour_get_green(target.colour), amount);
         _b = lerp(_b, colour_get_blue(target.colour), amount);
 
-        _style.sprite = target.sprite;
-        _style.subimg = target.subimg;
-        _style.font = target.font;
-        _style.line_height = target.line_height;
+        // Non-blendable fields snap; colour and alpha carry over from the previous frame.
+        var blended_alpha = lerp(_style.alpha, target.alpha, amount);
+        _style.copy_from(target);
         _style.colour = make_colour_rgb(round(_r), round(_g), round(_b));
-        _style.alpha = lerp(_style.alpha, target.alpha, amount);
-        return _style;
+        _style.alpha = blended_alpha;
     }
 
     /// @ignore 

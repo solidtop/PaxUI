@@ -18,7 +18,7 @@ function PaxUpdater() constructor {
     static _update_tree = function(widget, dt) {
         widget._layout.read_bounds(widget.bounds, widget.content_bounds);
         widget._update(dt);
-        widget._update_transition(dt);
+        widget._update_transitions(dt);
 
         var children = widget.children;
         for (var i = 0; i < array_length(children); i++) 

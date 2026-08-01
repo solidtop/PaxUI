@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"PaxSliderStyles",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"PaxSliderStyles",
+  "parent":{
+    "name":"Styling",
+    "path":"folders/Styling.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

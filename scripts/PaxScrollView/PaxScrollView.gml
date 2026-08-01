@@ -195,7 +195,7 @@ function PaxScrollView() : PaxWidget() constructor {
         return self;
     }
 
-    /// @desc [Override] Advances drag tracking, momentum and smoothing.
+    /// @ignore [Override] Advances drag tracking, momentum and smoothing.
     /// @param {Real} dt
     static _update = function(dt) {
         if (_dragging) {
@@ -215,7 +215,7 @@ function PaxScrollView() : PaxWidget() constructor {
         _update_smoothing(dt);
     }
 
-    /// @desc [Override] Reacts to pointer events bubbling through the view.
+    /// @ignore [Override] Reacts to pointer events bubbling through the view.
     /// @param {Struct.PaxEvent} event
     static _on_event = function(event) {
         switch (event.type) {

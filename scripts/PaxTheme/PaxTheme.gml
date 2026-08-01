@@ -1,11 +1,9 @@
 /// @desc A theme: shared style presets that widgets reference by default.
 function PaxTheme() constructor {
     widget = new PaxStyle();
-    button = new PaxButtonStyle();
-    slider = new PaxSliderStyle();
-
-    label = new PaxStyle();
-    label.colour = c_black;
+    label = PaxStyle.build_text(c_black);
+    button = new PaxButtonStyles();
+    slider = new PaxSliderStyles();
 }
 
 /// @desc Returns the active theme; pass one to make it active.

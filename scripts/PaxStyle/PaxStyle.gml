@@ -29,24 +29,17 @@ function PaxStyle() constructor {
         style.alpha = alpha;
         return style;
     }
-}
 
-/// @desc Per-state style presets for buttons. Construct and override individual states to make a variant.
-function PaxButtonStyle() constructor {
-    normal = PaxStyle.build_solid(#3F3F46);
-    hovered = PaxStyle.build_solid(#52525B);
-    pressed = PaxStyle.build_solid(#27272A);
-    disabled = PaxStyle.build_solid(#3F3F46, 0.5);
-    focused = PaxStyle.build_solid(#72525D);
-}
-
-/// @desc Style for a slider: the three parts' looks plus their sizes.
-function PaxSliderStyle() constructor {
-    track = PaxStyle.build_solid(#3F3F46);
-    fill = PaxStyle.build_solid(#6366F1);
-    handle = PaxStyle.build_solid(#E4E4E7);
-    track_height = 8;
-    handle_size = 16;
+    /// @desc Builds a text style, which draws no background.
+    /// @param {Constant.Colour} colour
+    /// @param {Asset.GMFont} font
+    /// @returns {Struct.PaxStyle}
+    static build_text = function(colour, font = -1) {
+        var style = new PaxStyle();
+        style.colour = colour;
+        style.font = font;
+        return style;
+    }
 }
 
 new PaxStyle();
