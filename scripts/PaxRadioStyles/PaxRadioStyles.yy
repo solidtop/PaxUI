@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"PaxRadioStyles",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"PaxRadioStyles",
+  "parent":{
+    "name":"Styling",
+    "path":"folders/Styling.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

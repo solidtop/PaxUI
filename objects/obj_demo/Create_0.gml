@@ -64,3 +64,31 @@ root.add(new PaxWidget()
     .gap(10)
     .add(music_toggle)
     .add(new PaxLabel("Music")));
+
+difficulty = new PaxRadioGroup()
+    .on_change(function(radio) {
+        show_debug_message("difficulty: " + radio.name);
+    });
+
+var difficulty_row = new PaxWidget()
+    .row()
+    .align(PaxAlign.Center)
+    .gap(24);
+
+var difficulties = ["Easy", "Normal", "Hard"];
+for (var i = 0; i < array_length(difficulties); i++) {
+    var option = new PaxRadio()
+        .named(difficulties[i])
+        .group(difficulty)
+        .checked(i == 1)
+        .transition(15);
+
+    difficulty_row.add(new PaxWidget()
+        .row()
+        .align(PaxAlign.Center)
+        .gap(10)
+        .add(option)
+        .add(new PaxLabel(difficulties[i])));
+}
+
+root.add(difficulty_row);

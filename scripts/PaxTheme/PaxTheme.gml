@@ -5,6 +5,7 @@ function PaxTheme() constructor {
     button = new PaxButtonStyles();
     slider = new PaxSliderStyles();
     checkbox = new PaxCheckboxStyles();
+    radio = new PaxRadioStyles();
     toggle = new PaxToggleStyles();
 }
 

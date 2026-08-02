@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"PaxRadio",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"PaxRadio",
+  "parent":{
+    "name":"Widgets",
+    "path":"folders/Widgets.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -56,7 +56,7 @@ function PaxCheckable() : PaxWidget() constructor {
             case PaxEventType.PointerReleased:
                 if (!is_pressed) break;
                 is_pressed = false;
-                if (_hit_test(event.x, event.y)) _apply(!_checked);
+                if (_hit_test(event.x, event.y)) _activate();
                 event.consume();
                 break;
             case PaxEventType.PointerCancelled:
@@ -64,14 +64,19 @@ function PaxCheckable() : PaxWidget() constructor {
                 break;
             case PaxEventType.KeyPressed:
                 if (event.key != vk_space && event.key != vk_enter) break;
-                _apply(!_checked);
+                _activate();
                 event.consume();
                 break;
             case PaxEventType.Accept:
-                _apply(!_checked);
+                _activate();
                 event.consume();
                 break;
         }
+    }
+
+    /// @ignore [Virtual] Responds to a click or key press. Override to change what activation does.
+    static _activate = function() {
+        _apply(!_checked);
     }
 
     /// @ignore [Virtual] Reacts to the checked state changing, before toggled is emitted.
