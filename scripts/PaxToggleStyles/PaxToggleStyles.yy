@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"PaxToggleStyles",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"PaxToggleStyles",
+  "parent":{
+    "name":"Styling",
+    "path":"folders/Styling.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

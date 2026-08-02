@@ -32,7 +32,7 @@ function PaxButton() : PaxWidget() constructor {
         return self;
     }
 
-    /// @desc Uses a per-state style set in place of the theme's. The set is linked, not copied.
+    /// @desc [Override] Uses a per-state style set in place of the theme's. The set is linked, not copied.
     /// @param {Struct.PaxButtonStyles} preset_styles
     /// @returns {Struct.PaxButton}
     static styled = function(preset_styles) {

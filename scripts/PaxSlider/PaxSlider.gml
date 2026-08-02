@@ -64,7 +64,7 @@ function PaxSlider() : PaxWidget() constructor {
         return self;
     }
 
-    /// @desc Uses a per-part style set in place of the theme's. The set is linked, not copied.
+    /// @desc [Override] Uses a per-part style set in place of the theme's. The set is linked, not copied.
     /// @param {Struct.PaxSliderStyles} preset_styles
     /// @returns {Struct.PaxSlider}
     static styled = function(preset_styles) {

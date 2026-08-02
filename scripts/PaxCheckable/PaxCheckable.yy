@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"PaxCheckable",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"PaxCheckable",
+  "parent":{
+    "name":"Widgets",
+    "path":"folders/Widgets.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

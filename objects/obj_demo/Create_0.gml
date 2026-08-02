@@ -34,4 +34,33 @@ root.column().gap(30).center();
 root.add(default_slider);
 root.add(custom_slider);
 
-root.add(new PaxButton().size(300, 100).text("Button"))
+checkbox = new PaxCheckbox()
+    .size(32, 32)
+    .checked(true)
+    .transition(15)
+    .on_toggled(function(is_checked) {
+        show_debug_message("checkbox: " + string(is_checked));
+    });
+
+var labelled_checkbox = new PaxWidget()
+    .row()
+    .align(PaxAlign.Center)
+    .gap(10)
+    .add(checkbox)
+    .add(new PaxLabel("Enable music"));
+
+root.add(labelled_checkbox);
+
+music_toggle = new PaxToggle()
+    .checked(true)
+    .transition(15)
+    .on_toggled(function(is_on) {
+        show_debug_message("music: " + string(is_on));
+    });
+
+root.add(new PaxWidget()
+    .row()
+    .align(PaxAlign.Center)
+    .gap(10)
+    .add(music_toggle)
+    .add(new PaxLabel("Music")));

@@ -39,14 +39,15 @@ function PaxScrollView() : PaxWidget() constructor {
     /// @ignore
     _velocity_y = 0;
     
+    /// @ignore
+    static _add_content = PaxWidget.add;
+    _add_content(_content);
+    
     clips_children = true;
     scroll_x = 0;
     scroll_y = 0;
     
     scrolled = new PaxSignal();
-
-    static _add_content = PaxWidget.add;
-    _add_content(_content);
 
     /// @desc Enables or disables drag scrolling (wheel scrolling is unaffected).
     /// @param {Bool} value

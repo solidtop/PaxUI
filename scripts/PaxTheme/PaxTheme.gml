@@ -4,6 +4,8 @@ function PaxTheme() constructor {
     label = PaxStyle.build_text(c_black);
     button = new PaxButtonStyles();
     slider = new PaxSliderStyles();
+    checkbox = new PaxCheckboxStyles();
+    toggle = new PaxToggleStyles();
 }
 
 /// @desc Returns the active theme; pass one to make it active.
