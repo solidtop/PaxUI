@@ -1,94 +1,36 @@
 display_set_gui_maximise();
 
-root = new PaxRoot();
+root = new PaxRoot().row();
 
-default_slider = new PaxSlider()
-    .width(300)
-    .range(0, 100)
-    .value(40)
-    .on_change(function(new_value) {
-        show_debug_message("default: " + string(new_value));
-    });
+// sidebar: a scrollable column of demo buttons
+sidebar = new PaxScrollView().width(200).background(#18181B).padding(12).gap(8).column();
 
-var custom_styles = new PaxSliderStyles();
-custom_styles.track = PaxStyle.build_solid(#1E293B);  
-custom_styles.fill = PaxStyle.build_solid(#22C55E);   
-custom_styles.handle = PaxStyle.build_solid(#FACC15);  
-custom_styles.handle_hovered = PaxStyle.build_solid(#FDE047);
-custom_styles.handle_focused = PaxStyle.build_solid(#FEF08A);
-custom_styles.track_height = 14;                       
-custom_styles.handle_size  = 30;                     
+// content: fills the rest, repopulated when a demo is picked
+content = new PaxWidget().expand().padding(28);
 
-custom_slider = new PaxSlider()
-    .width(300)
-    .range(0, 1)
-    .value(0.25)
-    .step(0.1)                                        
-    .styled(custom_styles)
-    .transition(15)
-    .on_change(function(new_value) {
-        show_debug_message("custom: " + string(new_value));
-    });
+root.add(sidebar).add(content);
 
-root.column().gap(30).center();
-root.add(default_slider);
-root.add(custom_slider);
+demos = [
+    { name: "Buttons", build: demo_buttons },
+    { name: "Sliders", build: demo_sliders },
+    { name: "Labels", build: demo_labels },
+    { name: "Checkboxes", build: demo_checkbox },
+    { name: "Toggles", build: demo_toggle },
+    { name: "Radios", build: demo_radios },
+    { name: "Layout", build: demo_layout },
+    { name: "Animation", build: demo_animation },
+];
 
-checkbox = new PaxCheckbox()
-    .size(32, 32)
-    .checked(true)
-    .transition(15)
-    .on_toggled(function(is_checked) {
-        show_debug_message("checkbox: " + string(is_checked));
-    });
-
-var labelled_checkbox = new PaxWidget()
-    .row()
-    .align(PaxAlign.Center)
-    .gap(10)
-    .add(checkbox)
-    .add(new PaxLabel("Enable music"));
-
-root.add(labelled_checkbox);
-
-music_toggle = new PaxToggle()
-    .checked(true)
-    .transition(15)
-    .on_toggled(function(is_on) {
-        show_debug_message("music: " + string(is_on));
-    });
-
-root.add(new PaxWidget()
-    .row()
-    .align(PaxAlign.Center)
-    .gap(10)
-    .add(music_toggle)
-    .add(new PaxLabel("Music")));
-
-difficulty = new PaxRadioGroup()
-    .on_change(function(radio) {
-        show_debug_message("difficulty: " + radio.name);
-    });
-
-var difficulty_row = new PaxWidget()
-    .row()
-    .align(PaxAlign.Center)
-    .gap(24);
-
-var difficulties = ["Easy", "Normal", "Hard"];
-for (var i = 0; i < array_length(difficulties); i++) {
-    var option = new PaxRadio()
-        .named(difficulties[i])
-        .group(difficulty)
-        .checked(i == 1)
-        .transition(15);
-
-    difficulty_row.add(new PaxWidget()
-        .row()
-        .align(PaxAlign.Center)
-        .gap(10)
-        .add(option)
-        .add(new PaxLabel(difficulties[i])));
+// one nav button per demo; clicking swaps the content
+for (var i = 0; i < array_length(demos); i++) {
+    var demo = demos[i];
+    var nav_button = new PaxButton().text(demo.name).height(40);
+    nav_button.on_clicked(method({ content: content, demo: demo }, function(sender) {
+        content.clear();
+        demo.build(content);
+    }));
+    sidebar.add(nav_button);
 }
 
-root.add(difficulty_row);
+// show the first demo on start
+demos[0].build(content);

@@ -47,13 +47,21 @@ function PaxWidget() constructor {
     
     /// @desc Destroys this widget and all descendants, freeing native resources.
     static destroy = function() {
-        if (parent != undefined) 
+        if (parent != undefined)
             parent.remove(self);
-        
+
         for (var i = array_length(children) - 1; i >= 0; i--)
             children[i].destroy();
-        
+
         _layout.destroy();
+    }
+
+    /// @desc Destroys and removes every child, leaving this widget empty.
+    /// @returns {Struct.PaxWidget}
+    static clear = function() {
+        for (var i = array_length(children) - 1; i >= 0; i--)
+            children[i].destroy();
+        return self;
     }
 
     /// @desc Returns whether the widget has been destroyed.

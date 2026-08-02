@@ -1,7 +1,7 @@
 /// @desc A theme: shared style presets that widgets reference by default.
 function PaxTheme() constructor {
     widget = new PaxStyle();
-    label = PaxStyle.build_text(c_black);
+    label = PaxStyle.build_text(c_white);
     button = new PaxButtonStyles();
     slider = new PaxSliderStyles();
     checkbox = new PaxCheckboxStyles();

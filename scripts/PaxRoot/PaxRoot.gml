@@ -22,4 +22,8 @@ function PaxRoot() : PaxWidget() constructor {
     static render = function() {
         _renderer.render(self);
     }
+    
+    static _draw = function(ctx) {
+        
+    }
 }
