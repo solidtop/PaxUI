@@ -123,6 +123,24 @@ function demo_radios(container) {
     });
 }
 
+/// @desc Builds the text input showcase into the given container.
+/// @param {Struct.PaxWidget} container
+function demo_text_input(container) {
+    container.column().gap(16);
+
+    container.add(new PaxLabel("Text Input"));
+
+    container.add(new PaxTextInput().width(340).placeholder("Type your name..."));
+
+    container.add(new PaxTextInput().width(340).text("Editable text")
+        .on_changed(function(value) { show_debug_message("changed: " + value); }));
+
+    container.add(new PaxTextInput().width(340).placeholder("Press Enter to submit")
+        .on_submitted(function(value) { show_debug_message("submitted: " + value); }));
+
+    container.add(new PaxTextInput().width(340).text("Disabled").disable());
+}
+
 /// @desc A coloured box of the given size, for the layout demos.
 /// @param {Constant.Colour} colour
 /// @param {Real} box_width

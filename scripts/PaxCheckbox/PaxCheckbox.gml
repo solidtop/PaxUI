@@ -21,10 +21,9 @@ function PaxCheckbox() : PaxCheckable() constructor {
         var checkbox_styles = _get_styles();
         var box = _resolve_style(_box_target_style(checkbox_styles), _box_transition);
 
-        if (box.sprite != undefined) {
+        if (box.sprite != undefined) 
             ctx.sprite(box.sprite, box.subimg,
                 bounds.x, bounds.y, bounds.width, bounds.height, box.colour);
-        }
 
         if (!_checked) return;
 

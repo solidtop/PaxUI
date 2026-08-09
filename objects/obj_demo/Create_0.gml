@@ -17,6 +17,7 @@ demos = [
     { name: "Checkboxes", build: demo_checkbox },
     { name: "Toggles", build: demo_toggle },
     { name: "Radios", build: demo_radios },
+    { name: "Text Input", build: demo_text_input },
     { name: "Layout", build: demo_layout },
     { name: "Animation", build: demo_animation },
 ];

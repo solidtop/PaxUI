@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"PaxTextInput",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"PaxTextInput",
+  "parent":{
+    "name":"Widgets",
+    "path":"folders/Widgets.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

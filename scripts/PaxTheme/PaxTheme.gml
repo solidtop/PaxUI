@@ -7,6 +7,7 @@ function PaxTheme() constructor {
     checkbox = new PaxCheckboxStyles();
     radio = new PaxRadioStyles();
     toggle = new PaxToggleStyles();
+    text_input = new PaxTextInputStyles();
 }
 
 /// @desc Returns the active theme; pass one to make it active.

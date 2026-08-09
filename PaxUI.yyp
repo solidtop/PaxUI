@@ -62,6 +62,8 @@
     {"id":{"name":"PaxSliderStyles","path":"scripts/PaxSliderStyles/PaxSliderStyles.yy",},},
     {"id":{"name":"PaxStyle","path":"scripts/PaxStyle/PaxStyle.yy",},},
     {"id":{"name":"PaxStyleTransition","path":"scripts/PaxStyleTransition/PaxStyleTransition.yy",},},
+    {"id":{"name":"PaxTextInput","path":"scripts/PaxTextInput/PaxTextInput.yy",},},
+    {"id":{"name":"PaxTextInputStyles","path":"scripts/PaxTextInputStyles/PaxTextInputStyles.yy",},},
     {"id":{"name":"PaxTheme","path":"scripts/PaxTheme/PaxTheme.yy",},},
     {"id":{"name":"PaxToggle","path":"scripts/PaxToggle/PaxToggle.yy",},},
     {"id":{"name":"PaxToggleStyles","path":"scripts/PaxToggleStyles/PaxToggleStyles.yy",},},

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"PaxTextInputStyles",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"PaxTextInputStyles",
+  "parent":{
+    "name":"Styling",
+    "path":"folders/Styling.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
